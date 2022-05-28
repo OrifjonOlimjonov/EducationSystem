@@ -20,4 +20,24 @@
         android:name="uz.orifjon.educationsysteminandroid.CourseInfoFragment"
         android:label="fragment_course_info"
         tools:layout="@layout/fragment_course_info" />
+    <fragment
+        android:id="@+id/addGroupFragment"
+        android:name="uz.orifjon.educationsysteminandroid.AddGroupFragment"
+        android:label="fragment_add_group"
+        tools:layout="@layout/fragment_add_group" />
+    <fragment
+        android:id="@+id/groupInfoFragment"
+        android:name="uz.orifjon.educationsysteminandroid.GroupInfoFragment"
+        android:label="fragment_group_info"
+        tools:layout="@layout/fragment_group_info" />
+    <fragment
+        android:id="@+id/addMentorFragment"
+        android:name="uz.orifjon.educationsysteminandroid.AddMentorFragment"
+        android:label="fragment_add_mentor"
+        tools:layout="@layout/fragment_add_mentor" />
+    <fragment
+        android:id="@+id/mentorInfoFragment"
+        android:name="uz.orifjon.educationsysteminandroid.MentorInfoFragment"
+        android:label="fragment_mentor_info"
+        tools:layout="@layout/fragment_mentor_info" />
 </navigation>

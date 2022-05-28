@@ -8,15 +8,13 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.adapters.AdapterRV
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
-import uz.orifjon.educationsysteminandroid.databinding.FragmentAddGroupBinding
+import uz.orifjon.educationsysteminandroid.databinding.FragmentAddMentorBinding
 import uz.orifjon.educationsysteminandroid.models.Course
-import java.security.acl.Group
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-
-class AddGroupFragment : Fragment() {
+class AddMentorFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -28,29 +26,27 @@ class AddGroupFragment : Fragment() {
         }
     }
 
-    private lateinit var binding: FragmentAddGroupBinding
+    private lateinit var binding: FragmentAddMentorBinding
     private lateinit var mySqliteHelper: MySqliteHelper
     private lateinit var adapter: AdapterRV
     private lateinit var list: ArrayList<Course>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAddGroupBinding.inflate(inflater)
+        binding = FragmentAddMentorBinding.inflate(inflater)
         mySqliteHelper = MySqliteHelper(requireContext())
         list = mySqliteHelper.getAllCourses()
         adapter = AdapterRV(list) { course, i ->
             val bundle = Bundle()
             bundle.putLong("id", course.id)
             bundle.putInt("index", i)
-            findNavController().navigate(R.id.groupInfoFragment, bundle)
+            findNavController().navigate(R.id.mentorInfoFragment, bundle)
         }
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
-
         binding.rv.adapter = adapter
-
         return binding.root
     }
-
 
 }
