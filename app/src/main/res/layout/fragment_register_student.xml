@@ -142,8 +142,11 @@
         app:layout_constraintVertical_bias="0.05">
 
         <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinnerMentor"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
+            android:prompt="@string/mentor"
+            android:spinnerMode="dialog"
             />
     </LinearLayout>
     <LinearLayout
@@ -162,8 +165,11 @@
         app:layout_constraintVertical_bias="0.05">
 
         <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinnerGroup"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
+            android:prompt="@string/mentor"
+            android:spinnerMode="dialog"
             />
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
@@ -172,7 +178,7 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:background="@drawable/btn_background"
-        android:text="Talaba qo’shish"
+        android:text="Saqlash"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
