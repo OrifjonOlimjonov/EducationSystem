@@ -1,14 +1,19 @@
 package uz.orifjon.educationsysteminandroid
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.adapters.AdapterMentorRV
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentMentorInfoBinding
+import uz.orifjon.educationsysteminandroid.databinding.MentorEditDialogBinding
 import uz.orifjon.educationsysteminandroid.models.Mentor
 
 private const val ARG_PARAM1 = "param1"
@@ -40,8 +45,56 @@ class MentorInfoFragment : Fragment() {
         binding.toolbar.title = tool
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         list = mySqliteHelper.getAllMentor()
-        adapter = AdapterMentorRV(list)
+        adapter = AdapterMentorRV(list, { mentor, i ->
+            list.removeAt(i)
+            mySqliteHelper.deleteMentor(mentor)
+            adapter.notifyItemRemoved(i)
+            adapter.notifyItemRangeChanged(i, list.size)
+        }, { mentor, i ->
+            val alertDialog = AlertDialog.Builder(requireContext())
+            val binding = MentorEditDialogBinding.inflate(layoutInflater)
+            alertDialog.setView(binding.root)
+            val alertDialog1 = alertDialog.create()
+            alertDialog1.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            binding.mentorName.setText(mentor.firstname)
+            binding.mentorSurname.setText(mentor.lastname)
+            binding.mentorPatron.setText(mentor.patron)
+
+            binding.btnSave.setOnClickListener {
+                if (binding.mentorName.text.isNotEmpty() && binding.mentorPatron.text.isNotEmpty() && binding.mentorSurname.text.isNotEmpty()) {
+                    val firstName = binding.mentorName.text.toString()
+                    val lastName = binding.mentorSurname.text.toString()
+                    val patron = binding.mentorPatron.text.toString()
+
+                    val mentor = Mentor(
+                        firstname = firstName,
+                        lastname = lastName,
+                        patron = patron,
+                        speciality = tool!!
+                    )
+                    mySqliteHelper.editMentor(mentor)
+                    alertDialog1.dismiss()
+                    adapter.notifyItemChanged(i)
+                }
+
+            }
+            binding.btnCancel.setOnClickListener {
+                alertDialog1.dismiss()
+            }
+            alertDialog1.show()
+        })
         binding.rv.adapter = adapter
+
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.addButton -> {
+                    val bundle = Bundle()
+                    bundle.putString("tool", tool)
+                    findNavController().navigate(R.id.addNewMentorFragment, bundle)
+                }
+            }
+            true
+        }
         return binding.root
     }
 

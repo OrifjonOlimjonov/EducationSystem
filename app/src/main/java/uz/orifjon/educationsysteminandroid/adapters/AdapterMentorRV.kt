@@ -7,13 +7,20 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.orifjon.educationsysteminandroid.databinding.RvMentorItemBinding
 import uz.orifjon.educationsysteminandroid.models.Mentor
 
-class AdapterMentorRV(var list: ArrayList<Mentor>) : RecyclerView.Adapter<AdapterMentorRV.VH>() {
+class AdapterMentorRV(var list: ArrayList<Mentor>,var onDelete:(Mentor,Int)->Unit,var onEdit:(Mentor,Int)->Unit) : RecyclerView.Adapter<AdapterMentorRV.VH>() {
 
     inner class VH(var binding: RvMentorItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
         fun onBind(mentor: Mentor, position: Int) {
             binding.tvName.text = "${mentor.firstname} ${mentor.lastname}"
+
+            binding.btnDelete.setOnClickListener {
+                onDelete(mentor,position)
+            }
+            binding.btnEdit.setOnClickListener {
+                onEdit(mentor,position)
+            }
         }
 
     }
