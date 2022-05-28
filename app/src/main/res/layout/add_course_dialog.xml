@@ -38,7 +38,7 @@
             app:layout_constraintVertical_bias="0.02">
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/courseName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/edittext_border"
@@ -64,7 +64,7 @@
             app:layout_constraintVertical_bias="0.02">
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/courseInfo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/edittext_border"
