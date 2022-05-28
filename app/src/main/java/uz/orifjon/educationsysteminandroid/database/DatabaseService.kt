@@ -40,6 +40,8 @@ interface DatabaseService {
 
     fun getGroupList():ArrayList<Group>
 
+    fun getMentorGroupList(mentorId:Long):ArrayList<Group>
+
     // TODO: student
 
     fun addStudent(student: Student):Long

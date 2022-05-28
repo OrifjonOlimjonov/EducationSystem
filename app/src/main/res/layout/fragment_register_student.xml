@@ -168,7 +168,7 @@
             android:id="@+id/spinnerGroup"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            android:prompt="@string/mentor"
+            android:prompt="@string/group"
             android:spinnerMode="dialog"
             />
     </LinearLayout>

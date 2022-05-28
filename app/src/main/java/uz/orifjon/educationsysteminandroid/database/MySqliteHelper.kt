@@ -262,6 +262,35 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
         return list
     }
 
+    override fun getMentorGroupList(mentorId: Long): ArrayList<Group> {
+        val list = ArrayList<Group>()
+        val database = this.readableDatabase
+        val query = "SELECT * FROM $GROUP_TABLE WHERE $GROUP_MENTOR_ID = $mentorId "
+        val cursor = database.rawQuery(query, null)
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getLong(0)
+                val groupName = cursor.getString(1)
+                val groupIsOpen = cursor.getInt(2)
+                val groupCourseId = cursor.getInt(3)
+                val groupMentorId = cursor.getInt(4)
+                val groupDate = cursor.getString(5)
+                val groupType = cursor.getString(6)
+                val group = Group(
+                    id = id,
+                    groupName = groupName,
+                    groupIsOpen = groupIsOpen,
+                    groupDate = groupDate,
+                    groupType = groupType,
+                    courseId = groupCourseId,
+                    mentorId = groupMentorId
+                )
+                list.add(group)
+            } while (cursor.moveToNext())
+        }
+        return list
+    }
+
     override fun addStudent(student: Student): Long {
         val database = this.writableDatabase
         val contentValues = ContentValues()

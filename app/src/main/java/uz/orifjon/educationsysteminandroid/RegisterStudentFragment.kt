@@ -10,10 +10,13 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import uz.orifjon.educationsysteminandroid.adapters.SpinnerGroupAdapter
 import uz.orifjon.educationsysteminandroid.adapters.SpinnerMentorAdapter
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentRegisterStudentBinding
+import uz.orifjon.educationsysteminandroid.models.Group
 import uz.orifjon.educationsysteminandroid.models.Mentor
+import uz.orifjon.educationsysteminandroid.models.Student
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -31,8 +34,10 @@ class RegisterStudentFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentRegisterStudentBinding
-    private lateinit var spinnerAdapter: SpinnerMentorAdapter
-    private lateinit var list: ArrayList<Mentor>
+    private lateinit var spinnerMentor: SpinnerMentorAdapter
+    private lateinit var spinnerGroup: SpinnerGroupAdapter
+    private lateinit var listMentor: ArrayList<Mentor>
+    private lateinit var listGroup: ArrayList<Group>
     private lateinit var mySqliteHelper: MySqliteHelper
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +45,12 @@ class RegisterStudentFragment : Fragment() {
     ): View? {
         binding = FragmentRegisterStudentBinding.inflate(inflater)
         mySqliteHelper = MySqliteHelper(requireContext())
-        list = mySqliteHelper.getAllMentor()
-        spinnerAdapter = SpinnerMentorAdapter(list)
-        binding.spinnerMentor.adapter = spinnerAdapter
+        listMentor = mySqliteHelper.getAllMentor()
+        spinnerMentor = SpinnerMentorAdapter(listMentor)
+        binding.spinnerMentor.adapter = spinnerMentor
+        listGroup = mySqliteHelper.getMentorGroupList(listMentor[binding.spinnerMentor.selectedItemPosition].id)
+        spinnerGroup = SpinnerGroupAdapter(listGroup)
+        binding.spinnerGroup.adapter = spinnerGroup
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
 
         binding.tvDate.setOnClickListener {
@@ -59,6 +67,31 @@ class RegisterStudentFragment : Fragment() {
                 }, 2022, 3, 6
             )
             datePickerDialog.show()
+        }
+        binding.btnAddStudent.setOnClickListener {
+            if (binding.spinnerMentor.selectedItemPosition >= 0) {
+                if (binding.spinnerGroup.selectedItemPosition >= 0) {
+                    val firstName = binding.tvFirstName.text.toString()
+                    val lastName = binding.tvLastName.text.toString()
+                    val patron = binding.tvPatron.text.toString()
+                    val date = binding.tvDate.text.toString()
+                    val group = binding.spinnerGroup.selectedItemId.toInt() + 1
+                    val student = Student(
+                        firstname = firstName,
+                        lastname = lastName,
+                        patron = patron,
+                        registerDate = date,
+                        groupId = group
+                    )
+                    mySqliteHelper.addStudent(student)
+                    findNavController().popBackStack()
+                } else {
+                    Toast.makeText(requireContext(), "Guruhni tanlang!", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(requireContext(), "Mentorni tanlang!", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         return binding.root
