@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import uz.orifjon.educationsysteminandroid.databinding.FragmentMentorInfoBinding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -21,12 +22,15 @@ class MentorInfoFragment : Fragment() {
         }
     }
 
+    private lateinit var binding: FragmentMentorInfoBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentMentorInfoBinding.inflate(inflater)
 
-        return inflater.inflate(R.layout.fragment_mentor_info, container, false)
+        return binding.root
     }
 
 }
