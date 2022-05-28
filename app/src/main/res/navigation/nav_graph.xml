@@ -10,4 +10,9 @@
         android:name="uz.orifjon.educationsysteminandroid.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/addCourseFragment"
+        android:name="uz.orifjon.educationsysteminandroid.AddCourseFragment"
+        android:label="fragment_add_course"
+        tools:layout="@layout/fragment_add_course" />
 </navigation>
