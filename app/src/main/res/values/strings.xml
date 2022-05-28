@@ -6,4 +6,10 @@
     <string name="kurslar">Kurslar</string>
     <string name="guruhlar">Guruhlar</string>
     <string name="android_ndevelopment">Android \nDevelopment</string>
+    <string name="sarlavha">Sarlavha</string>
+    <string name="kurs_haqida">Kurs haqida</string>
+    <string name="qo_shish">Qo\'shish</string>
+    <string name="yopish">Yopish</string>
+    <string name="kurs_nomi">Kurs nomi</string>
+    <string name="kurs_ma_lumotlari">Kurs ma\'lumotlari</string>
 </resources>
