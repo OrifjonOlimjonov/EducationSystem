@@ -42,8 +42,7 @@
             android:paddingStart="@dimen/_10sdp"
             android:textColor="@color/black"
             android:textColorHint="#C9C3C3"
-            android:textSize="20sp"
-            tools:ignore="RtlSymmetry" />
+            android:textSize="20sp"  />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linear1"
@@ -69,8 +68,7 @@
             android:paddingStart="@dimen/_10sdp"
             android:textColor="@color/black"
             android:textColorHint="#C9C3C3"
-            android:textSize="20sp"
-            tools:ignore="RtlSymmetry" />
+            android:textSize="20sp"  />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linear2"
@@ -96,8 +94,7 @@
             android:paddingStart="@dimen/_10sdp"
             android:textColor="@color/black"
             android:textColorHint="#C9C3C3"
-            android:textSize="20sp"
-            tools:ignore="RtlSymmetry" />
+            android:textSize="20sp"  />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linear3"
