@@ -42,6 +42,7 @@ class AddMentorFragment : Fragment() {
             val bundle = Bundle()
             bundle.putLong("id", course.id)
             bundle.putInt("index", i)
+            bundle.putString("toolbar",course.name)
             findNavController().navigate(R.id.mentorInfoFragment, bundle)
         }
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
