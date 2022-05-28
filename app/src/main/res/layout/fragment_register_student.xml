@@ -15,7 +15,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-        app:title="@string/android_ndevelopment"
+        app:title="Talaba qo'shish"
         app:titleTextColor="@color/white" />
     <LinearLayout
         android:id="@+id/linear"
@@ -23,26 +23,151 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:background="#F9F6F6"
+        app:layout_constraintVertical_chainStyle="packed"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
-        app:layout_constraintBottom_toTopOf="@id/btnAddStudent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toTopOf="@id/linear1"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintVertical_bias="0.02">
 
         <EditText
-            android:id="@+id/courseName"
+            android:id="@+id/tvLastName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/edittext_border"
-            android:hint="@string/kurs_nomi"
+            android:hint="Familiyasi"
             android:paddingStart="@dimen/_10sdp"
             android:textColor="@color/black"
             android:textColorHint="#C9C3C3"
             android:textSize="20sp"
             tools:ignore="RtlSymmetry" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="#F9F6F6"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/linear2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear"
+        app:layout_constraintVertical_bias="0.02">
+
+        <EditText
+            android:id="@+id/tvFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_border"
+            android:hint="Ismi"
+            android:paddingStart="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:textColorHint="#C9C3C3"
+            android:textSize="20sp"
+            tools:ignore="RtlSymmetry" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="#F9F6F6"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/linear3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear1"
+        app:layout_constraintVertical_bias="0.02">
+
+        <EditText
+            android:id="@+id/tvPatron"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_border"
+            android:hint="Otasining ismi"
+            android:paddingStart="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:textColorHint="#C9C3C3"
+            android:textSize="20sp"
+            tools:ignore="RtlSymmetry" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="#F9F6F6"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/linear4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear2"
+        app:layout_constraintVertical_bias="0.02">
+
+        <EditText
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_border"
+            android:hint="12/12/2022"
+            android:focusable="false"
+            android:paddingStart="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:textColorHint="#C9C3C3"
+            android:textSize="20sp"
+            tools:ignore="RtlSymmetry"
+            android:paddingRight="@dimen/_10sdp"
+            android:drawableEnd="@drawable/calendar"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/edittext_border"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/linear5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear3"
+        app:layout_constraintVertical_bias="0.05">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/edittext_border"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/btnAddStudent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear4"
+        app:layout_constraintVertical_bias="0.05">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            />
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAddStudent"

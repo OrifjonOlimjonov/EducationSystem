@@ -40,4 +40,9 @@
         android:name="uz.orifjon.educationsysteminandroid.MentorInfoFragment"
         android:label="fragment_mentor_info"
         tools:layout="@layout/fragment_mentor_info" />
+    <fragment
+        android:id="@+id/registerStudentFragment"
+        android:name="uz.orifjon.educationsysteminandroid.RegisterStudentFragment"
+        android:label="fragment_register_student"
+        tools:layout="@layout/fragment_register_student" />
 </navigation>

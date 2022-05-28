@@ -40,6 +40,9 @@ class CourseInfoFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
+        binding.btnAddStudent.setOnClickListener {
+            findNavController().navigate(R.id.registerStudentFragment)
+        }
         return binding.root
     }
 
