@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import uz.orifjon.educationsysteminandroid.adapters.AdapterRV
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.AddCourseDialogBinding
 import uz.orifjon.educationsysteminandroid.databinding.FragmentAddCourseBinding
@@ -23,21 +24,26 @@ class AddCourseFragment : Fragment() {
     private lateinit var binding: FragmentAddCourseBinding
     private lateinit var mySqliteHelper: MySqliteHelper
     private lateinit var list: ArrayList<Course>
+    private lateinit var adapter: AdapterRV
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddCourseBinding.inflate(inflater)
         mySqliteHelper = MySqliteHelper(requireContext())
-
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
         list = mySqliteHelper.getAllCourses()
+        adapter = AdapterRV(list) { course, i ->
+            val bundle = Bundle()
+            bundle.putInt("index", i)
+            bundle.putLong("id", course.id)
+            findNavController().navigate(R.id.courseInfoFragment, bundle)
+        }
+        binding.rv.adapter = adapter
         if (list.isEmpty()) {
             Toast.makeText(requireContext(), "Ma'lumotlar mavjud emas!!", Toast.LENGTH_SHORT).show()
-        }else{
-
         }
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -48,11 +54,13 @@ class AddCourseFragment : Fragment() {
                     val alertDialog1 = alertDialog.create()
                     alertDialog1.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                     addCourseDialogBinding.btnSave.setOnClickListener {
-                        val courseName = addCourseDialogBinding.courseName.toString()
-                        val courseInfo = addCourseDialogBinding.courseInfo.toString()
+                        val courseName = addCourseDialogBinding.courseName.text.toString()
+                        val courseInfo = addCourseDialogBinding.courseInfo.text.toString()
                         val course = Course(name = courseName, description = courseInfo)
+                        course.id = mySqliteHelper.addCourse(course)
                         list.add(course)
-                        mySqliteHelper.addCourse(course)
+                        adapter.notifyItemInserted(list.size)
+                        alertDialog1.dismiss()
                     }
                     addCourseDialogBinding.btnCancel.setOnClickListener {
                         alertDialog1.dismiss()

@@ -103,7 +103,7 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
             arrayOf("$id"), null, null, null
         )
         cursor.moveToFirst()
-        return Course(cursor.getInt(0), cursor.getString(1), cursor.getString(2))
+        return Course(cursor.getLong(0), cursor.getString(1), cursor.getString(2))
     }
 
     override fun getAllCourses(): ArrayList<Course> {
@@ -113,7 +113,7 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
         val cursor = database.rawQuery(query, null)
         if (cursor.moveToFirst()) {
             do {
-                val id = cursor.getInt(0)
+                val id = cursor.getLong(0)
                 val name = cursor.getString(1)
                 val description = cursor.getString(2)
                 val course = Course(id, name, description)
@@ -161,7 +161,7 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
         val cursor = database.rawQuery(query, null)
         if (cursor.moveToFirst()) {
             do {
-                val id = cursor.getInt(0)
+                val id = cursor.getLong(0)
                 val firstName = cursor.getString(1)
                 val lastName = cursor.getString(2)
                 val patron = cursor.getString(3)
@@ -223,7 +223,7 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
         )
         cursor.moveToFirst()
         return Group(
-            id = cursor.getInt(0),
+            id = cursor.getLong(0),
             groupName = cursor.getString(1),
             groupIsOpen = cursor.getInt(2),
             courseId = cursor.getInt(3),
@@ -240,7 +240,7 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
         val cursor = database.rawQuery(query, null)
         if (cursor.moveToFirst()) {
             do {
-                val id = cursor.getInt(0)
+                val id = cursor.getLong(0)
                 val groupName = cursor.getString(1)
                 val groupIsOpen = cursor.getInt(2)
                 val groupCourseId = cursor.getInt(3)
@@ -302,7 +302,7 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
         val cursor = database.rawQuery(query, null)
         if (cursor.moveToFirst()) {
             do {
-                val id = cursor.getInt(0)
+                val id = cursor.getLong(0)
                 val firstname = cursor.getString(1)
                 val lastname = cursor.getString(2)
                 val patron = cursor.getString(3)

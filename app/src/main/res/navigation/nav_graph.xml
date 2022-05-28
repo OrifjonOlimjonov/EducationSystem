@@ -15,4 +15,9 @@
         android:name="uz.orifjon.educationsysteminandroid.AddCourseFragment"
         android:label="fragment_add_course"
         tools:layout="@layout/fragment_add_course" />
+    <fragment
+        android:id="@+id/courseInfoFragment"
+        android:name="uz.orifjon.educationsysteminandroid.CourseInfoFragment"
+        android:label="fragment_course_info"
+        tools:layout="@layout/fragment_course_info" />
 </navigation>

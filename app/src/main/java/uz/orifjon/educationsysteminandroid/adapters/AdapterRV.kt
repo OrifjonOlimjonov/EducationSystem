@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.orifjon.educationsysteminandroid.databinding.ItemBinding
 import uz.orifjon.educationsysteminandroid.models.Course
 
-class AdapterRV(var list: ArrayList<Course>) : RecyclerView.Adapter<AdapterRV.VH>() {
+class AdapterRV(var list: ArrayList<Course>,var onItemClick:(Course,Int)->Unit) : RecyclerView.Adapter<AdapterRV.VH>() {
 
     inner class VH(var item: ItemBinding) : RecyclerView.ViewHolder(item.root) {
 
         fun onBind(course: Course, position: Int) {
             item.tvCourseName.text = course.name
+            itemView.setOnClickListener {
+                onItemClick(course,position)
+            }
         }
 
     }

@@ -12,4 +12,5 @@
     <string name="yopish">Yopish</string>
     <string name="kurs_nomi">Kurs nomi</string>
     <string name="kurs_ma_lumotlari">Kurs ma\'lumotlari</string>
+    <string name="android">Android das da sda sda sd sad sad q wdwq kursida siz dastlab kotlin dasturlash tili o’rganasiz. Shundan so’ng, sodda va murakkab ko’rinishidagi UI komponentlari yordamida mobil ilovalarning tashqi dizayn ko’rinishi qannday yaratish o’rgatiladi. SQlite malumotlar bazasi hamda ROOM va realm kabi mashhur kutubxonalar, API tushunchasi va internet orqali ishlovchi dasturlar strukturasi, Firebase texnologiyasi, shuningdek hozirda judayam ko’p foydalanilayotgan arxitektura komponentalari, dagger kutubxonalari orqali murakkab mobil ilovalar yaratish imkoniyatiga ega bo’lasiz.</string>
 </resources>
