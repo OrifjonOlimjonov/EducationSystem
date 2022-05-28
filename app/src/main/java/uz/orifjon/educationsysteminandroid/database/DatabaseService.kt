@@ -24,7 +24,7 @@ interface DatabaseService {
 
     fun deleteMentor(mentor: Mentor)
 
-    fun getAllMentor():ArrayList<Mentor>
+    fun getAllMentor(tool:String):ArrayList<Mentor>
 
     // TODO: group
 

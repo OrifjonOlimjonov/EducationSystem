@@ -45,7 +45,8 @@ class RegisterStudentFragment : Fragment() {
     ): View? {
         binding = FragmentRegisterStudentBinding.inflate(inflater)
         mySqliteHelper = MySqliteHelper(requireContext())
-        listMentor = mySqliteHelper.getAllMentor()
+        val name = arguments?.getString("name")
+        listMentor = mySqliteHelper.getAllMentor(name!!)
         spinnerMentor = SpinnerMentorAdapter(listMentor)
         binding.spinnerMentor.adapter = spinnerMentor
         listGroup = mySqliteHelper.getMentorGroupList(listMentor[binding.spinnerMentor.selectedItemPosition].id)

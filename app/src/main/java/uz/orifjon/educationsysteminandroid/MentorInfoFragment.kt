@@ -44,7 +44,11 @@ class MentorInfoFragment : Fragment() {
         val tool = arguments?.getString("toolbar")
         binding.toolbar.title = tool
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
-        list = mySqliteHelper.getAllMentor()
+        list = mySqliteHelper.getAllMentor(tool!!)
+        
+        if(list.size == 0){
+            Toast.makeText(requireContext(), "Mentorlar mavjud emas!!", Toast.LENGTH_SHORT).show()
+        }
         adapter = AdapterMentorRV(list, { mentor, i ->
             list.removeAt(i)
             mySqliteHelper.deleteMentor(mentor)
@@ -67,12 +71,14 @@ class MentorInfoFragment : Fragment() {
                     val patron = binding.mentorPatron.text.toString()
 
                     val mentor = Mentor(
+                        id = mentor.id,
                         firstname = firstName,
                         lastname = lastName,
                         patron = patron,
                         speciality = tool!!
                     )
                     mySqliteHelper.editMentor(mentor)
+                    list[i] = mentor
                     alertDialog1.dismiss()
                     adapter.notifyItemChanged(i)
                 }

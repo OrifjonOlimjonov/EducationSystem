@@ -41,7 +41,9 @@ class CourseInfoFragment : Fragment() {
             findNavController().popBackStack()
         }
         binding.btnAddStudent.setOnClickListener {
-            findNavController().navigate(R.id.registerStudentFragment)
+            val bundle = Bundle()
+            bundle.putString("name",course.name)
+            findNavController().navigate(R.id.registerStudentFragment,bundle)
         }
         return binding.root
     }

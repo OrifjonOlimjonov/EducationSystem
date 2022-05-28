@@ -154,10 +154,10 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
         database.delete(MENTOR_TABLE, "$MENTOR_ID = ?", arrayOf(mentor.id.toString()))
     }
 
-    override fun getAllMentor(): ArrayList<Mentor> {
+    override fun getAllMentor(tool:String): ArrayList<Mentor> {
         val list = ArrayList<Mentor>()
         val database = this.readableDatabase
-        val query = "SELECT * FROM $MENTOR_TABLE"
+        val query = "SELECT * FROM $MENTOR_TABLE WHERE $MENTOR_SPECIALITY = '$tool'"
         val cursor = database.rawQuery(query, null)
         if (cursor.moveToFirst()) {
             do {

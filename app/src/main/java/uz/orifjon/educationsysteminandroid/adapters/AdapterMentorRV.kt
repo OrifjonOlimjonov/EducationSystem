@@ -14,7 +14,7 @@ class AdapterMentorRV(var list: ArrayList<Mentor>,var onDelete:(Mentor,Int)->Uni
         @SuppressLint("SetTextI18n")
         fun onBind(mentor: Mentor, position: Int) {
             binding.tvName.text = "${mentor.firstname} ${mentor.lastname}"
-
+            binding.tvPatron.text = mentor.patron
             binding.btnDelete.setOnClickListener {
                 onDelete(mentor,position)
             }
