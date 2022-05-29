@@ -1,11 +1,15 @@
 package uz.orifjon.educationsysteminandroid
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import uz.orifjon.educationsysteminandroid.adapters.AdapterStudentRV
+import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentGroupViewBinding
+import uz.orifjon.educationsysteminandroid.models.Student
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -23,14 +27,28 @@ class GroupViewFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentGroupViewBinding
+    private lateinit var mySqliteHelper: MySqliteHelper
+    private lateinit var adapter: AdapterStudentRV
+    private lateinit var list: ArrayList<Student>
+
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGroupViewBinding.inflate(inflater)
+        mySqliteHelper = MySqliteHelper(requireContext())
+        val groupId = arguments?.getLong("id")
+        list = mySqliteHelper.getStudentByGroup(groupId!!)
+        val group = mySqliteHelper.getGroupById(groupId)
+        binding.groupName.text = group.groupName
+        binding.groupCount.text = "O'quvchilar soni: ${list.size} ta"
+        binding.groupTime.text = "Vaqti: ${group.groupDate.split(" ").take(2)[0]}"
+        adapter = AdapterStudentRV(list, { student, i ->
 
+        }, { student, i ->
 
-
+        })
         return binding.root
     }
 

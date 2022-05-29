@@ -114,8 +114,10 @@ class ViewPager2Fragment : Fragment() {
 
                 alertDialog1.show()
             }, { group, i ->
-
                 // TODO: View
+                val bundle = Bundle()
+                bundle.putLong("id", group.id)
+
 
                 findNavController().navigate(R.id.groupViewFragment)
             })

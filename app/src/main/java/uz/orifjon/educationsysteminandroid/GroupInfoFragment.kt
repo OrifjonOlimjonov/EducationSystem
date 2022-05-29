@@ -31,6 +31,7 @@ class GroupInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentGroupInfoBinding
     private lateinit var mySqliteHelper: MySqliteHelper
+    private lateinit var adapterViewPager2: ViewPager2Adapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,7 +44,7 @@ class GroupInfoFragment : Fragment() {
         val list = arrayListOf("Ochilgan guruhlar", "Ochilayotgan guruhlar")
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
 
-        val adapterViewPager2 = ViewPager2Adapter(childFragmentManager, lifecycle,courseId!!)
+        adapterViewPager2 = ViewPager2Adapter(childFragmentManager, lifecycle, courseId!!)
         binding.viewPager2.adapter = adapterViewPager2
         binding.toolbar.menu.setGroupVisible(0, false)
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
@@ -66,9 +67,9 @@ class GroupInfoFragment : Fragment() {
             when (it.itemId) {
                 R.id.addButton -> {
                     val bundle = Bundle()
-                    bundle.putString("tool",tool)
-                    bundle.putLong("courseId",courseId!!)
-                    findNavController().navigate(R.id.addNewGroupFragment,bundle)
+                    bundle.putString("tool", tool)
+                    bundle.putLong("courseId", courseId)
+                    findNavController().navigate(R.id.addNewGroupFragment, bundle)
                 }
             }
 

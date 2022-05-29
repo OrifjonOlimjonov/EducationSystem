@@ -22,6 +22,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
@@ -35,11 +37,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@id/btnStartGroup"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/groupName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="PDP Android G-23"
@@ -47,6 +51,7 @@
                     android:textSize="@dimen/_15ssp" />
 
                 <TextView
+                    android:id="@+id/groupCount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="O’quvchilar soni: 20 ta"
@@ -54,12 +59,48 @@
                     android:textSize="@dimen/_15ssp" />
 
                 <TextView
+                    android:id="@+id/groupTime"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Vaqti: 16:30 - 18:30"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp" />
             </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnStartGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:background="@drawable/btn_background"
+                android:text="Guruhga darsni boshlash"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line" />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:text="Barcha o’quvchilar ro’yxati:"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:textSize="@dimen/_20ssp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnStartGroup" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                tools:listitem="@layout/rv_mentor_item"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
