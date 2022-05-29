@@ -335,8 +335,8 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
                 val firstname = cursor.getString(1)
                 val lastname = cursor.getString(2)
                 val patron = cursor.getString(3)
-                val registerDate = cursor.getString(4)
-                val groupId = cursor.getLong(5)
+                val groupId = cursor.getLong(4)
+                val registerDate = cursor.getString(5)
                 val student = Student(
                     id = id1,
                     firstname = firstname,

@@ -39,11 +39,10 @@ class EditStudentGroupFragment : Fragment() {
         binding = FragmentEditStudentGroupBinding.inflate(inflater)
         mySqliteHelper = MySqliteHelper(requireContext())
         val student = arguments?.getSerializable("student") as Student
-        val date = arguments?.getString("date")
         binding.tvFirstName.setText(student.firstname)
         binding.tvLastName.setText(student.lastname)
         binding.tvPatron.setText(student.patron)
-        binding.tvDate.setText(date)
+        binding.tvDate.setText(student.registerDate)
         binding.btnAddStudent.setOnClickListener {
             val firsName = binding.tvFirstName.text.toString()
             val lastName = binding.tvLastName.text.toString()

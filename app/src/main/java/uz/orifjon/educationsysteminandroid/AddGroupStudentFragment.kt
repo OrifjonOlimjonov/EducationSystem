@@ -56,7 +56,7 @@ class AddGroupStudentFragment : Fragment() {
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 { datePicker: DatePicker?, i: Int, i1: Int, i2: Int ->
-                    binding.tvDate.setText("$i2.$i1.$i")
+                    binding.tvDate.setText("$i2/$i1/$i")
                 }, 2022, 3, 6
             )
             datePickerDialog.show()
