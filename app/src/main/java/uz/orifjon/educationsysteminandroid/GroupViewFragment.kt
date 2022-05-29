@@ -79,7 +79,7 @@ class GroupViewFragment : Fragment() {
             Toast.makeText(requireContext(), "O'quvchilar mavjud emas!!", Toast.LENGTH_SHORT).show()
         }
         binding.btnStartGroup.setOnClickListener {
-            if(list.size > 10){
+            if(list.size > 4){
             group.groupIsOpen = 1
             mySqliteHelper.editGroup(group)
             findNavController().popBackStack()

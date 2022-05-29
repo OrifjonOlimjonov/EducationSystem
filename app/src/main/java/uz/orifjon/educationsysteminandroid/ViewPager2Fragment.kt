@@ -95,6 +95,7 @@ class ViewPager2Fragment : Fragment() {
                     val groupMentor = binding.spinnerMentor.selectedItemPosition
                     val groupTime = binding.spinnerTime.selectedItem.toString()
                     val groupNew = Group(
+                        id = group.id,
                         groupName = groupName,
                         groupIsOpen = 0,
                         groupType = mySqliteHelper.getCourseById(param2!!).name,
@@ -110,14 +111,12 @@ class ViewPager2Fragment : Fragment() {
                 binding.btnCancel.setOnClickListener {
                     alertDialog1.dismiss()
                 }
-
-
                 alertDialog1.show()
             }, { group, i ->
                 // TODO: View
                 val bundle = Bundle()
                 bundle.putLong("id", group.id)
-                findNavController().navigate(R.id.groupViewFragment,bundle)
+                findNavController().navigate(R.id.groupViewFragment, bundle)
             })
             binding.rvGroup.adapter = adapter
         }
@@ -128,7 +127,6 @@ class ViewPager2Fragment : Fragment() {
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance(param1: Long, param2: Long) =
             ViewPager2Fragment().apply {
