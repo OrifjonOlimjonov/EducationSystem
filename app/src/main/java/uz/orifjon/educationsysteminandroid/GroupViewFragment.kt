@@ -1,13 +1,20 @@
 package uz.orifjon.educationsysteminandroid
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.adapters.AdapterStudentRV
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
+import uz.orifjon.educationsysteminandroid.databinding.DeleteDialogBinding
+import uz.orifjon.educationsysteminandroid.databinding.EditGroupDialogBinding
 import uz.orifjon.educationsysteminandroid.databinding.FragmentGroupViewBinding
 import uz.orifjon.educationsysteminandroid.models.Student
 
@@ -45,10 +52,56 @@ class GroupViewFragment : Fragment() {
         binding.groupCount.text = "O'quvchilar soni: ${list.size} ta"
         binding.groupTime.text = "Vaqti: ${group.groupDate.split(" ").take(2)[0]}"
         adapter = AdapterStudentRV(list, { student, i ->
-
+            val alertDialog = AlertDialog.Builder(requireContext())
+            val binding = DeleteDialogBinding.inflate(layoutInflater)
+            alertDialog.setView(binding.root)
+            val alertDialog1 = alertDialog.create()
+            alertDialog1.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            binding.btnYes.setOnClickListener {
+                mySqliteHelper.deleteStudent(student)
+                list.removeAt(i)
+                adapter.notifyItemRemoved(i)
+                adapter.notifyItemRangeChanged(i, list.size)
+                this.binding.groupCount.text = "O'quvchilar soni: ${list.size} ta"
+                alertDialog1.dismiss()
+            }
+            binding.btnNo.setOnClickListener {
+                alertDialog1.dismiss()
+            }
+            alertDialog1.show()
         }, { student, i ->
-
+                val bundle = Bundle()
+                bundle.putSerializable("student",student)
+                bundle.putString("date",student.registerDate)
+                findNavController().navigate(R.id.editStudentGroupFragment,bundle)
         })
+        if(list.size == 0){
+            Toast.makeText(requireContext(), "O'quvchilar mavjud emas!!", Toast.LENGTH_SHORT).show()
+        }
+        binding.btnStartGroup.setOnClickListener {
+            if(list.size > 10){
+            group.groupIsOpen = 1
+            mySqliteHelper.editGroup(group)
+            findNavController().popBackStack()
+            }else{
+                Toast.makeText(requireContext(), "Guruh hali to'lmagan!!", Toast.LENGTH_SHORT).show()
+            }
+        }
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+        binding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.addButton->{
+                    val bundle = Bundle()
+                    bundle.putLong("id",groupId)
+                    findNavController().navigate(R.id.addGroupStudentFragment,bundle)
+                }
+            }
+            true
+        }
+
+        binding.rv.adapter = adapter
         return binding.root
     }
 

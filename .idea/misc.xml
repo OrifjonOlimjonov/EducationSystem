@@ -14,13 +14,16 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/drawable/trash_icon.xml" value="0.157" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/activity_main.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/add_course_dialog.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/delete_dialog.xml" value="0.6" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/edit_group_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_add_course.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_add_group.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_add_group_student.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_add_mentor.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_add_new_group.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_add_new_mentor.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_course_info.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_edit_student_group.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_group_info.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_group_view.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_main.xml" value="0.24010416666666667" />

@@ -117,9 +117,7 @@ class ViewPager2Fragment : Fragment() {
                 // TODO: View
                 val bundle = Bundle()
                 bundle.putLong("id", group.id)
-
-
-                findNavController().navigate(R.id.groupViewFragment)
+                findNavController().navigate(R.id.groupViewFragment,bundle)
             })
             binding.rvGroup.adapter = adapter
         }

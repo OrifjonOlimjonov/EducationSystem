@@ -65,4 +65,14 @@
         android:name="uz.orifjon.educationsysteminandroid.GroupViewFragment"
         android:label="fragment_group_view"
         tools:layout="@layout/fragment_group_view" />
+    <fragment
+        android:id="@+id/addGroupStudentFragment"
+        android:name="uz.orifjon.educationsysteminandroid.AddGroupStudentFragment"
+        android:label="fragment_add_group_student"
+        tools:layout="@layout/fragment_add_group_student" />
+    <fragment
+        android:id="@+id/editStudentGroupFragment"
+        android:name="uz.orifjon.educationsysteminandroid.EditStudentGroupFragment"
+        android:label="fragment_edit_student_group"
+        tools:layout="@layout/fragment_edit_student_group" />
 </navigation>
