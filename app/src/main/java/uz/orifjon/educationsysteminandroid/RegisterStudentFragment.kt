@@ -54,7 +54,7 @@ class RegisterStudentFragment : Fragment() {
                 mySqliteHelper.getMentorGroupList(listMentor[binding.spinnerMentor.selectedItemPosition].id)
             spinnerGroup = SpinnerGroupAdapter(listGroup)
             binding.spinnerGroup.adapter = spinnerGroup
-        }else{
+        } else {
             Toast.makeText(requireContext(), "Mentorlar mavjud emas!", Toast.LENGTH_SHORT).show()
         }
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
@@ -63,7 +63,7 @@ class RegisterStudentFragment : Fragment() {
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 { datePicker: DatePicker?, i: Int, i1: Int, i2: Int ->
-                   binding.tvDate.setText("$i2/$i1/$i")
+                    binding.tvDate.setText("$i2/$i1/$i")
                 }, 2022, 3, 6
             )
             datePickerDialog.show()
@@ -71,20 +71,24 @@ class RegisterStudentFragment : Fragment() {
         binding.btnAddStudent.setOnClickListener {
             if (binding.spinnerMentor.selectedItemPosition >= 0) {
                 if (binding.spinnerGroup.selectedItemPosition >= 0) {
-                    val firstName = binding.tvFirstName.text.toString()
-                    val lastName = binding.tvLastName.text.toString()
-                    val patron = binding.tvPatron.text.toString()
-                    val date = binding.tvDate.text.toString()
-                    val group = binding.spinnerGroup.selectedItemId.toInt() + 1
-                    val student = Student(
-                        firstname = firstName,
-                        lastname = lastName,
-                        patron = patron,
-                        registerDate = date,
-                        groupId = group
-                    )
-                    mySqliteHelper.addStudent(student)
-                    findNavController().popBackStack()
+                    if (binding.tvPatron.text.isEmpty() && binding.tvFirstName.text.isEmpty() && binding.tvLastName.text.isEmpty() && binding.tvDate.text.isEmpty()) {
+                        Toast.makeText(requireContext(), "Maydonlarni to'ldiring!!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val firstName = binding.tvFirstName.text.toString()
+                        val lastName = binding.tvLastName.text.toString()
+                        val patron = binding.tvPatron.text.toString()
+                        val date = binding.tvDate.text.toString()
+                        val group = binding.spinnerGroup.selectedItemId.toInt() + 1
+                        val student = Student(
+                            firstname = firstName,
+                            lastname = lastName,
+                            patron = patron,
+                            registerDate = date,
+                            groupId = group
+                        )
+                        mySqliteHelper.addStudent(student)
+                        findNavController().popBackStack()
+                    }
                 } else {
                     Toast.makeText(requireContext(), "Guruhni tanlang!", Toast.LENGTH_SHORT).show()
                 }

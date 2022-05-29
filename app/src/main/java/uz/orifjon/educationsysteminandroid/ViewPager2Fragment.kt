@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.adapters.AdapterGroupRV
 import uz.orifjon.educationsysteminandroid.adapters.SpinnerMentorAdapter
 import uz.orifjon.educationsysteminandroid.adapters.SpinnerTimeAdapter
@@ -60,12 +61,13 @@ class ViewPager2Fragment : Fragment() {
         }
         if (list.isNotEmpty() && listCount.isNotEmpty()) {
             adapter = AdapterGroupRV(list, listCount, { group, i ->
+                //TODO: REMOVE group
                 mySqliteHelper.deleteGroup(group)
                 list.removeAt(i)
                 adapter.notifyItemRemoved(i)
                 adapter.notifyItemRangeChanged(i, list.size)
             }, { group, i ->
-                // TODO: edit
+                // TODO: EDIT group
                 val list = arrayListOf("09:00-11:00", "11:00-14:00", "14:00-16:00", "19:00-21:00")
                 val alertDialog = AlertDialog.Builder(requireContext())
                 val binding = EditGroupDialogBinding.inflate(layoutInflater)
@@ -112,7 +114,10 @@ class ViewPager2Fragment : Fragment() {
 
                 alertDialog1.show()
             }, { group, i ->
+
                 // TODO: View
+
+                findNavController().navigate(R.id.groupViewFragment)
             })
             binding.rvGroup.adapter = adapter
         }
