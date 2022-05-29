@@ -50,4 +50,14 @@
         android:name="uz.orifjon.educationsysteminandroid.AddNewMentorFragment"
         android:label="fragment_add_new_mentor"
         tools:layout="@layout/fragment_add_new_mentor" />
+    <fragment
+        android:id="@+id/addNewGroupFragment"
+        android:name="uz.orifjon.educationsysteminandroid.AddNewGroupFragment"
+        android:label="fragment_add_new_group"
+        tools:layout="@layout/fragment_add_new_group" />
+    <fragment
+        android:id="@+id/viewPager2Fragment"
+        android:name="uz.orifjon.educationsysteminandroid.ViewPager2Fragment"
+        android:label="fragment_view_pager2"
+        tools:layout="@layout/fragment_view_pager2" />
 </navigation>

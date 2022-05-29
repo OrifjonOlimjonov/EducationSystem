@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import uz.orifjon.educationsysteminandroid.adapters.ViewPager2Adapter
+import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentGroupInfoBinding
 
 private const val ARG_PARAM1 = "param1"
@@ -29,46 +30,43 @@ class GroupInfoFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentGroupInfoBinding
+    private lateinit var mySqliteHelper: MySqliteHelper
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGroupInfoBinding.inflate(inflater)
+        mySqliteHelper = MySqliteHelper(requireContext())
         val tool = arguments?.getString("tool")
         binding.toolbar.title = tool
         val list = arrayListOf("Ochilgan guruhlar", "Ochilayotgan guruhlar")
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
 
-        val adapterViewPager2 =ViewPager2Adapter(childFragmentManager,lifecycle)
+        val adapterViewPager2 = ViewPager2Adapter(childFragmentManager, lifecycle)
         binding.viewPager2.adapter = adapterViewPager2
-        binding.toolbar.menu.setGroupVisible(0,false)
+        binding.toolbar.menu.setGroupVisible(0, false)
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             tab.text = list[position]
         }.attach()
-        binding.tabLayout.addOnTabSelectedListener(object:TabLayout.OnTabSelectedListener{
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                if(tab?.position == 0){
-                    binding.toolbar.menu.setGroupVisible(0,false)
-                }else{
-                    binding.toolbar.menu.setGroupVisible(0,true)
+                if (tab?.position == 0) {
+                    binding.toolbar.menu.setGroupVisible(0, false)
+                } else {
+                    binding.toolbar.menu.setGroupVisible(0, true)
                 }
-
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
-            }
-
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
 
         binding.toolbar.setOnMenuItemClickListener {
-            when(it.itemId){
-                R.id.addButton->{
-
+            when (it.itemId) {
+                R.id.addButton -> {
+                    val bundle = Bundle()
+                    bundle.putString("tool",tool)
+                    findNavController().navigate(R.id.addNewGroupFragment,bundle)
                 }
             }
 
