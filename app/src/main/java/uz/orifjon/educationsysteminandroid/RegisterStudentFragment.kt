@@ -62,14 +62,8 @@ class RegisterStudentFragment : Fragment() {
         binding.tvDate.setOnClickListener {
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
-                OnDateSetListener { datePicker: DatePicker?, i: Int, i1: Int, i2: Int ->
-                    Toast.makeText(
-                        requireContext(),
-                        "$i2 $i1 $i",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    binding.tvDate.setText("$i2/$i1/$i")
+                { datePicker: DatePicker?, i: Int, i1: Int, i2: Int ->
+                   binding.tvDate.setText("$i2/$i1/$i")
                 }, 2022, 3, 6
             )
             datePickerDialog.show()

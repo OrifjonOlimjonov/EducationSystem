@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import uz.orifjon.educationsysteminandroid.databinding.FragmentAddNewGroupBinding
 
 private const val ARG_PARAM1 = "param1"
@@ -31,6 +32,27 @@ class AddNewGroupFragment : Fragment() {
         binding = FragmentAddNewGroupBinding.inflate(inflater, container, false)
         val courseName = arguments?.getString("tool")
 
+        binding.btnSaveGroup.setOnClickListener {
+            if (binding.tvGroupName.text.isNotEmpty()) {
+                if (binding.spinnerMentor.selectedItemPosition >= 0) {
+                    if (binding.spinnerTime.selectedItemPosition >= 0) {
+                        if (binding.spinnerWeek.selectedItemPosition >= 0){
+
+                        }else{
+                            Toast.makeText(requireContext(), "Juftlikni tanlang!", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Vaqtini tanlang!", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Mentorni tanlang!", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(requireContext(), "Guruh nomini kiriting!", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
 
 
         return binding.root

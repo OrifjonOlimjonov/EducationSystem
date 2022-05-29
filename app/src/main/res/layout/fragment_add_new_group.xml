@@ -115,6 +115,7 @@
             />
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSaveGroup"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="wrap_content"
         android:text="Saqlash"
