@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import uz.orifjon.educationsysteminandroid.databinding.FragmentGroupInfoBinding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -21,12 +22,16 @@ class GroupInfoFragment : Fragment() {
         }
     }
 
+    private lateinit var binding: FragmentGroupInfoBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentGroupInfoBinding.inflate(inflater)
 
-        return inflater.inflate(R.layout.fragment_group_info, container, false)
+
+
+        return binding.root
     }
 
 }
