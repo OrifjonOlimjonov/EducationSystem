@@ -43,8 +43,17 @@ class ViewPager2Fragment : Fragment() {
         for (i in 0 until list.size) {
             listCount.add(mySqliteHelper.getStudentByGroup(list[i].id).size)
         }
-        if (list.isNotEmpty()  && listCount.isNotEmpty()) {
-            adapter = AdapterGroupRV(list, listCount)
+        if (list.isNotEmpty() && listCount.isNotEmpty()) {
+            adapter = AdapterGroupRV(list, listCount,{ group, i ->
+                mySqliteHelper.deleteGroup(group)
+                list.removeAt(i)
+                adapter.notifyItemRemoved(i)
+                adapter.notifyItemRangeChanged(i, list.size)
+            },{group, i ->
+
+            },{group, i ->
+
+            })
             binding.rvGroup.adapter = adapter
         }
 

@@ -226,8 +226,8 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
             id = cursor.getLong(0),
             groupName = cursor.getString(1),
             groupIsOpen = cursor.getInt(2),
-            courseId = cursor.getInt(3),
-            mentorId = cursor.getInt(4),
+            courseId = cursor.getLong(3),
+            mentorId = cursor.getLong(4),
             groupDate = cursor.getString(5),
             groupType = cursor.getString(6)
         )
@@ -243,8 +243,8 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
                 val id = cursor.getLong(0)
                 val groupName = cursor.getString(1)
                 val groupIsOpen = cursor.getInt(2)
-                val groupCourseId = cursor.getInt(3)
-                val groupMentorId = cursor.getInt(4)
+                val groupCourseId = cursor.getLong(3)
+                val groupMentorId = cursor.getLong(4)
                 val groupDate = cursor.getString(5)
                 val groupType = cursor.getString(6)
                 val group = Group(
@@ -272,8 +272,8 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
                 val id = cursor.getLong(0)
                 val groupName = cursor.getString(1)
                 val groupIsOpen = cursor.getInt(2)
-                val groupCourseId = cursor.getInt(3)
-                val groupMentorId = cursor.getInt(4)
+                val groupCourseId = cursor.getLong(3)
+                val groupMentorId = cursor.getLong(4)
                 val groupDate = cursor.getString(5)
                 val groupType = cursor.getString(6)
                 val group = Group(

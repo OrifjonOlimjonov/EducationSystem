@@ -7,9 +7,9 @@ import android.widget.BaseAdapter
 import uz.orifjon.educationsysteminandroid.databinding.SpinnerMentorItemBinding
 
 class SpinnerTimeAdapter :BaseAdapter() {
-    val list = arrayListOf("Toq","Juft")
+    val list = arrayListOf("09:00-11:00","11:00-14:00","14:00-16:00","19:00-21:00")
 
-    override fun getCount(): Int = 2
+    override fun getCount(): Int= list.size
 
     override fun getItem(p0: Int): Any = list[p0]
 

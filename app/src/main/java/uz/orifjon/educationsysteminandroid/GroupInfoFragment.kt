@@ -38,6 +38,7 @@ class GroupInfoFragment : Fragment() {
         binding = FragmentGroupInfoBinding.inflate(inflater)
         mySqliteHelper = MySqliteHelper(requireContext())
         val tool = arguments?.getString("tool")
+        val courseId = arguments?.getLong("id")
         binding.toolbar.title = tool
         val list = arrayListOf("Ochilgan guruhlar", "Ochilayotgan guruhlar")
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
@@ -66,6 +67,8 @@ class GroupInfoFragment : Fragment() {
                 R.id.addButton -> {
                     val bundle = Bundle()
                     bundle.putString("tool",tool)
+                    bundle.putLong("courseId",courseId!!)
+
                     findNavController().navigate(R.id.addNewGroupFragment,bundle)
                 }
             }
