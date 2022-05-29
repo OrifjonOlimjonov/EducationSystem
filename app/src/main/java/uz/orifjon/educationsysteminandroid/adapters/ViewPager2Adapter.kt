@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import uz.orifjon.educationsysteminandroid.ViewPager2Fragment
 
 class ViewPager2Adapter(fragment: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragment, lifecycle) {
@@ -11,7 +12,6 @@ class ViewPager2Adapter(fragment: FragmentManager, lifecycle: Lifecycle) :
 
     override fun getItemCount(): Int = 2
 
-    override fun createFragment(position: Int): Fragment {
-                    return Fragment()
-    }
+    override fun createFragment(position: Int): Fragment =  ViewPager2Fragment.newInstance((position + 1) % 2)
+
 }

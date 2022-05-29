@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".GroupInfoFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -11,23 +11,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#0A252F"
+        app:layout_constraintBottom_toTopOf="@id/tabLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/menu"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tabLayout"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
         app:title="@string/android_ndevelopment"
         app:titleTextColor="@color/white" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#0A252F"
-        app:tabIndicatorColor="#50AE46"
-        app:tabMode="fixed"
-        app:tabIndicatorHeight="@dimen/_2sdp"
-        app:tabTextColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        />
+        app:tabIndicatorColor="#50AE46"
+        app:tabIndicatorHeight="@dimen/_2sdp"
+        app:tabMode="fixed"
+        app:layout_constraintBottom_toTopOf="@id/viewPager2"
+        app:tabTextColor="@color/white" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

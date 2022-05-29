@@ -38,7 +38,7 @@ interface DatabaseService {
 
     fun getGroupById(id: Long):Group
 
-    fun getGroupList():ArrayList<Group>
+    fun getGroupList(selected:Int):ArrayList<Group>
 
     fun getMentorGroupList(mentorId:Long):ArrayList<Group>
 
@@ -50,6 +50,6 @@ interface DatabaseService {
 
     fun deleteStudent(student: Student)
 
-    fun getStudentByGroup(id: Int):ArrayList<Student>
+    fun getStudentByGroup(id: Long):ArrayList<Student>
 
 }

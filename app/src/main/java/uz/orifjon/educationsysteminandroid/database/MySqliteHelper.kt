@@ -233,10 +233,10 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
         )
     }
 
-    override fun getGroupList(): ArrayList<Group> {
+    override fun getGroupList(selected:Int): ArrayList<Group> {
         val list = ArrayList<Group>()
         val database = this.readableDatabase
-        val query = "SELECT * FROM $GROUP_TABLE"
+        val query = "SELECT * FROM $GROUP_TABLE WHERE $GROUP_IS_OPEN = $selected"
         val cursor = database.rawQuery(query, null)
         if (cursor.moveToFirst()) {
             do {
@@ -324,25 +324,26 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
         database.delete(STUDENT_TABLE, "$STUDENT_ID = ?", arrayOf(student.id.toString()))
     }
 
-    override fun getStudentByGroup(id: Int): ArrayList<Student> {
+    override fun getStudentByGroup(id: Long): ArrayList<Student> {
         val list = ArrayList<Student>()
         val database = this.readableDatabase
         val query = "SELECT * FROM $STUDENT_TABLE WHERE $STUDENT_GROUP_ID = $id"
         val cursor = database.rawQuery(query, null)
         if (cursor.moveToFirst()) {
             do {
-                val id = cursor.getLong(0)
+                val id1 = cursor.getLong(0)
                 val firstname = cursor.getString(1)
                 val lastname = cursor.getString(2)
                 val patron = cursor.getString(3)
                 val registerDate = cursor.getString(4)
                 val groupId = cursor.getInt(5)
                 val student = Student(
-                    id = id,
+                    id = id1,
                     firstname = firstname,
                     lastname = lastname,
                     patron = patron,
-                    registerDate = registerDate, groupId = groupId
+                    registerDate = registerDate,
+                    groupId = groupId
                 )
 
                 list.add(student)
