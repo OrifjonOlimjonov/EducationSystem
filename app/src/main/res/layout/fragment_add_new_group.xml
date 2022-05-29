@@ -87,7 +87,7 @@
             android:id="@+id/spinnerTime"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            android:prompt="@string/mentor"
+            android:prompt="Vaqti:"
             android:spinnerMode="dialog"
             />
     </LinearLayout>
@@ -110,7 +110,7 @@
             android:id="@+id/spinnerWeek"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            android:prompt="@string/mentor"
+            android:prompt="Kunlari:"
             android:spinnerMode="dialog"
             />
     </LinearLayout>
