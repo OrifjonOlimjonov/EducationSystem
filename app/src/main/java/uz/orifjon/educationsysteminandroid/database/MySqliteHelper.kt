@@ -233,10 +233,10 @@ class MySqliteHelper(context: Context) : SQLiteOpenHelper(
         )
     }
 
-    override fun getGroupList(selected:Int): ArrayList<Group> {
+    override fun getGroupList(selected:Long,type:Long): ArrayList<Group> {
         val list = ArrayList<Group>()
         val database = this.readableDatabase
-        val query = "SELECT * FROM $GROUP_TABLE WHERE $GROUP_IS_OPEN = $selected"
+        val query = "SELECT * FROM $GROUP_TABLE WHERE $GROUP_IS_OPEN = $selected AND $GROUP_COURSE_ID = $type"
         val cursor = database.rawQuery(query, null)
         if (cursor.moveToFirst()) {
             do {

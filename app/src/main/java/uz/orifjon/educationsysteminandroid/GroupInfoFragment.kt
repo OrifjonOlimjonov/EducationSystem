@@ -43,7 +43,7 @@ class GroupInfoFragment : Fragment() {
         val list = arrayListOf("Ochilgan guruhlar", "Ochilayotgan guruhlar")
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
 
-        val adapterViewPager2 = ViewPager2Adapter(childFragmentManager, lifecycle)
+        val adapterViewPager2 = ViewPager2Adapter(childFragmentManager, lifecycle,courseId!!)
         binding.viewPager2.adapter = adapterViewPager2
         binding.toolbar.menu.setGroupVisible(0, false)
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
@@ -68,7 +68,6 @@ class GroupInfoFragment : Fragment() {
                     val bundle = Bundle()
                     bundle.putString("tool",tool)
                     bundle.putLong("courseId",courseId!!)
-
                     findNavController().navigate(R.id.addNewGroupFragment,bundle)
                 }
             }

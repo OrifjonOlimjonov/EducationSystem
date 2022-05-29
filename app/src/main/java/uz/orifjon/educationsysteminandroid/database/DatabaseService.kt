@@ -38,7 +38,7 @@ interface DatabaseService {
 
     fun getGroupById(id: Long):Group
 
-    fun getGroupList(selected:Int):ArrayList<Group>
+    fun getGroupList(selected:Long,type:Long):ArrayList<Group>
 
     fun getMentorGroupList(mentorId:Long):ArrayList<Group>
 

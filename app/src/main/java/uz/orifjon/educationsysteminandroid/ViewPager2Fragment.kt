@@ -12,14 +12,17 @@ import uz.orifjon.educationsysteminandroid.databinding.FragmentViewPager2Binding
 import uz.orifjon.educationsysteminandroid.models.Group
 
 private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 class ViewPager2Fragment : Fragment() {
-    private var param1: Int? = null
+    private var param1: Long? = null
+    private var param2: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getInt(ARG_PARAM1)
+            param1 = it.getLong(ARG_PARAM1)
+            param2 = it.getLong(ARG_PARAM2)
         }
     }
 
@@ -35,7 +38,7 @@ class ViewPager2Fragment : Fragment() {
         listCount = ArrayList()
         binding = FragmentViewPager2Binding.inflate(inflater)
         mySqliteHelper = MySqliteHelper(requireContext())
-        list = mySqliteHelper.getGroupList(param1!!)
+        list = mySqliteHelper.getGroupList(param1!!,param2!!)
 
         if (list.size == 0) {
             Toast.makeText(requireContext(), "Guruhlar mavjud emas!", Toast.LENGTH_SHORT).show()
@@ -65,10 +68,11 @@ class ViewPager2Fragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(param1: Int) =
+        fun newInstance(param1: Long,param2: Long) =
             ViewPager2Fragment().apply {
                 arguments = Bundle().apply {
-                    putInt(ARG_PARAM1, param1)
+                    putLong(ARG_PARAM1, param1)
+                    putLong(ARG_PARAM2, param2)
                 }
             }
     }
