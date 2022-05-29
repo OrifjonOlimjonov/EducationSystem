@@ -49,9 +49,14 @@ class RegisterStudentFragment : Fragment() {
         listMentor = mySqliteHelper.getAllMentor(name!!)
         spinnerMentor = SpinnerMentorAdapter(listMentor)
         binding.spinnerMentor.adapter = spinnerMentor
-        listGroup = mySqliteHelper.getMentorGroupList(listMentor[binding.spinnerMentor.selectedItemPosition].id)
-        spinnerGroup = SpinnerGroupAdapter(listGroup)
-        binding.spinnerGroup.adapter = spinnerGroup
+        if (listMentor.isNotEmpty()) {
+            listGroup =
+                mySqliteHelper.getMentorGroupList(listMentor[binding.spinnerMentor.selectedItemPosition].id)
+            spinnerGroup = SpinnerGroupAdapter(listGroup)
+            binding.spinnerGroup.adapter = spinnerGroup
+        }else{
+            Toast.makeText(requireContext(), "Mentorlar mavjud emas!", Toast.LENGTH_SHORT).show()
+        }
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
 
         binding.tvDate.setOnClickListener {

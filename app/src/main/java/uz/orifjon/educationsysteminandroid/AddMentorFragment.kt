@@ -45,8 +45,10 @@ class AddMentorFragment : Fragment() {
             bundle.putInt("index", i)
             bundle.putString("toolbar",course.name)
             findNavController().navigate(R.id.mentorInfoFragment, bundle)
+        }       
+        if(list.isEmpty()){
+            Toast.makeText(requireContext(), "Kurslar mavjud emas!", Toast.LENGTH_SHORT).show()
         }
-
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         binding.rv.adapter = adapter
         return binding.root
