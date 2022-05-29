@@ -3,7 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".GroupInfoFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0A252F"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tabLayout"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:title="@string/android_ndevelopment"
+        app:titleTextColor="@color/white" />
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0A252F"
+        app:tabIndicatorColor="#50AE46"
+        app:tabMode="fixed"
+        app:tabIndicatorHeight="@dimen/_2sdp"
+        app:tabTextColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

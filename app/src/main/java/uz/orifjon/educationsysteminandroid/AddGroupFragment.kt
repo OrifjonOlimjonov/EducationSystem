@@ -43,6 +43,7 @@ class AddGroupFragment : Fragment() {
             val bundle = Bundle()
             bundle.putLong("id", course.id)
             bundle.putInt("index", i)
+            bundle.putString("tool",course.name)
             findNavController().navigate(R.id.groupInfoFragment, bundle)
         }
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.databinding.FragmentGroupInfoBinding
 
 private const val ARG_PARAM1 = "param1"
@@ -28,9 +29,10 @@ class GroupInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGroupInfoBinding.inflate(inflater)
+        val tool = arguments?.getString("tool")
+        binding.toolbar.title = tool
 
-
-
+        binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         return binding.root
     }
 
