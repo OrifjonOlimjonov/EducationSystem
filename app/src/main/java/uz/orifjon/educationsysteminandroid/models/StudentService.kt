@@ -1,0 +1,23 @@
+package uz.orifjon.educationsysteminandroid.models
+
+import androidx.room.*
+
+@Dao
+interface StudentService {
+
+    @Insert
+    fun addStudent(student: Student)
+
+    @Update
+    fun editStudent(student: Student)
+
+    @Delete
+    fun deleteStudent(student: Student)
+
+    @Query("SELECT * FROM student")
+    fun listStudent():List<Student>
+
+    @Query("SELECT * FROM student WHERE group_id = :id")
+    fun listGroupStudent(id:Long):List<Student>
+
+}
