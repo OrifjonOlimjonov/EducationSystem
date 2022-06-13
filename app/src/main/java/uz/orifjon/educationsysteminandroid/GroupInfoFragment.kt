@@ -30,14 +30,13 @@ class GroupInfoFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentGroupInfoBinding
-    private lateinit var mySqliteHelper: MySqliteHelper
     private lateinit var adapterViewPager2: ViewPager2Adapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGroupInfoBinding.inflate(inflater)
-        mySqliteHelper = MySqliteHelper(requireContext())
+
         val tool = arguments?.getString("tool")
         val courseId = arguments?.getLong("id")
         binding.toolbar.title = tool
@@ -51,7 +50,7 @@ class GroupInfoFragment : Fragment() {
             tab.text = list[position]
         }.attach()
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
+            override fun onTabSelected(tab: TabLayout.Tab?) { 
                 if (tab?.position == 0) {
                     binding.toolbar.menu.setGroupVisible(0, false)
                 } else {

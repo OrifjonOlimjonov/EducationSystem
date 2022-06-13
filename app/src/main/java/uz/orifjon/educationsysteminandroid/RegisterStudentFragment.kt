@@ -63,8 +63,9 @@ class RegisterStudentFragment : Fragment() {
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 { datePicker: DatePicker?, i: Int, i1: Int, i2: Int ->
+
                     binding.tvDate.setText("$i2/$i1/$i")
-                }, 2022, 3, 6
+                }, 2022, 5, 6
             )
             datePickerDialog.show()
         }
@@ -72,7 +73,11 @@ class RegisterStudentFragment : Fragment() {
             if (binding.spinnerMentor.selectedItemPosition >= 0) {
                 if (binding.spinnerGroup.selectedItemPosition >= 0) {
                     if (binding.tvPatron.text.isEmpty() && binding.tvFirstName.text.isEmpty() && binding.tvLastName.text.isEmpty() && binding.tvDate.text.isEmpty()) {
-                        Toast.makeText(requireContext(), "Maydonlarni to'ldiring!!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Maydonlarni to'ldiring!!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     } else {
                         val firstName = binding.tvFirstName.text.toString()
                         val lastName = binding.tvLastName.text.toString()

@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid Room Relation/app/src/main/res/layout/fragment_add_course.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid Room Relation/app/src/main/res/layout/fragment_add_group_student.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid Room Relation/app/src/main/res/layout/fragment_add_new_group.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/drawable/arrow_item.xml" value="0.1695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/drawable/btn_background.xml" value="0.157" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/drawable/btn_delete_background.xml" value="0.157" />
@@ -14,7 +17,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/drawable/trash_icon.xml" value="0.157" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/activity_main.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/add_course_dialog.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/delete_dialog.xml" value="0.6" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/delete_dialog.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/edit_group_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_add_course.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Educationsysteminandroid/app/src/main/res/layout/fragment_add_group.xml" value="0.25416666666666665" />
