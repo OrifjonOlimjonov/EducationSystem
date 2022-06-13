@@ -6,7 +6,7 @@ import androidx.room.*
 interface CourseService {
 
     @Insert
-    fun addCourse(course: Course)
+    fun addCourse(course: Course):Long
 
     @Update
     fun editCourse(course: Course)

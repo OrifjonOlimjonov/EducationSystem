@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.adapters.SpinnerMentorAdapter
 import uz.orifjon.educationsysteminandroid.adapters.SpinnerTimeAdapter
 import uz.orifjon.educationsysteminandroid.adapters.SpinnerWeekAdapter
+import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentAddNewGroupBinding
 import uz.orifjon.educationsysteminandroid.models.Group
@@ -33,21 +34,24 @@ class AddNewGroupFragment : Fragment() {
     private lateinit var binding: FragmentAddNewGroupBinding
     private lateinit var adapterWeek: SpinnerWeekAdapter
     private lateinit var adapterTime: SpinnerTimeAdapter
-    private lateinit var adapter:SpinnerMentorAdapter
-    private lateinit var mySqliteHelper: MySqliteHelper
+    private lateinit var adapter: SpinnerMentorAdapter
+   // private lateinit var mySqliteHelper: MySqliteHelper
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAddNewGroupBinding.inflate(inflater, container, false)
-        mySqliteHelper = MySqliteHelper(requireContext())
+     //   mySqliteHelper = MySqliteHelper(requireContext())
         val courseName = arguments?.getString("tool")
         val courseId = arguments?.getLong("courseId")
         adapterTime = SpinnerTimeAdapter()
         adapterWeek = SpinnerWeekAdapter()
         binding.spinnerTime.adapter = adapterTime
         binding.spinnerWeek.adapter = adapterWeek
-        val list = mySqliteHelper.getAllMentor(courseName!!)
+        //  val list = mySqliteHelper.getAllMentor(courseName!!)
+        val list = AppDatabase.getDatabase(requireContext()).mentorDao()
+            .getByGroupMentor(courseName!!) as ArrayList
+
         adapter = SpinnerMentorAdapter(list)
         binding.spinnerMentor.adapter = adapter
         binding.btnSaveGroup.setOnClickListener {
@@ -55,10 +59,19 @@ class AddNewGroupFragment : Fragment() {
                 if (binding.spinnerMentor.selectedItemPosition >= 0) {
                     if (binding.spinnerTime.selectedItemPosition >= 0) {
                         if (binding.spinnerWeek.selectedItemPosition >= 0) {
-                            val groupName= binding.tvGroupName.text.toString()
-                            val groupDate = "${binding.spinnerTime.selectedItem} ${binding.spinnerWeek.selectedItem}"
-                            val group = Group(groupName = groupName, groupIsOpen = 0, groupType = courseName, groupDate = groupDate, courseId = courseId!!, mentorId = list[binding.spinnerMentor.selectedItemPosition].id)
-                            mySqliteHelper.addGroup(group)
+                            val groupName = binding.tvGroupName.text.toString()
+                            val groupDate =
+                                "${binding.spinnerTime.selectedItem} ${binding.spinnerWeek.selectedItem}"
+                            val group = Group(
+                                groupName = groupName,
+                                groupIsOpen = 0,
+                                groupType = courseName,
+                                groupDate = groupDate,
+                                courseId = courseId!!,
+                                mentorId = list[binding.spinnerMentor.selectedItemPosition].id
+                            )
+                            //mySqliteHelper.addGroup(group)
+                            AppDatabase.getDatabase(requireContext()).groupDao().addGroup(group)
                             findNavController().popBackStack()
                         } else {
                             Toast.makeText(

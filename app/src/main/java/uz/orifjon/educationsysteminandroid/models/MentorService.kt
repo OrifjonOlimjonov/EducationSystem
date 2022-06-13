@@ -1,6 +1,7 @@
 package uz.orifjon.educationsysteminandroid.models
 
 import androidx.room.*
+import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 
 @Dao
 interface MentorService {
@@ -16,4 +17,7 @@ interface MentorService {
 
     @Query("SELECT * FROM mentor")
     fun listMentor():List<Mentor>
+
+    @Query("SELECT * FROM mentor WHERE speciality = :tool")
+    fun getByGroupMentor(tool:String):List<Mentor>
 }

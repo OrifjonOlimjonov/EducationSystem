@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.adapters.AdapterRV
+import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.AddCourseDialogBinding
 import uz.orifjon.educationsysteminandroid.databinding.FragmentAddCourseBinding
@@ -20,9 +21,8 @@ private const val ARG_PARAM1 = "param1"
 
 
 class AddCourseFragment : Fragment() {
-    private var param1: String? = null
     private lateinit var binding: FragmentAddCourseBinding
-    private lateinit var mySqliteHelper: MySqliteHelper
+ //   private lateinit var mySqliteHelper: MySqliteHelper
     private lateinit var list: ArrayList<Course>
     private lateinit var adapter: AdapterRV
     override fun onCreateView(
@@ -30,11 +30,12 @@ class AddCourseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddCourseBinding.inflate(inflater)
-        mySqliteHelper = MySqliteHelper(requireContext())
+     //   mySqliteHelper = MySqliteHelper(requireContext())
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-        list = mySqliteHelper.getAllCourses()
+     //   list = mySqliteHelper.getAllCourses()
+        list = AppDatabase.getDatabase(requireContext()).courseDao().listCourse() as ArrayList<Course>
         adapter = AdapterRV(list) { course, i ->
             val bundle = Bundle()
             bundle.putInt("index", i)
@@ -57,7 +58,8 @@ class AddCourseFragment : Fragment() {
                         val courseName = addCourseDialogBinding.courseName.text.toString()
                         val courseInfo = addCourseDialogBinding.courseInfo.text.toString()
                         val course = Course(name = courseName, description = courseInfo)
-                        course.id = mySqliteHelper.addCourse(course)
+                        course.id =  AppDatabase.getDatabase(requireContext()).courseDao().addCourse(course)
+                            //mySqliteHelper.addCourse(course)
                         list.add(course)
                         adapter.notifyItemInserted(list.size)
                         alertDialog1.dismiss()

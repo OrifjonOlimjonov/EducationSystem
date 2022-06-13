@@ -10,7 +10,8 @@ import java.io.Serializable
     ForeignKey(
         entity = Group::class,
         parentColumns = arrayOf("id"),
-        childColumns = arrayOf("group_id")
+        childColumns = arrayOf("group_id"),
+        onDelete = ForeignKey.CASCADE
     )
 ])
 data class Student(
