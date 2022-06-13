@@ -2,9 +2,19 @@ package uz.orifjon.educationsysteminandroid.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "group_1")
+@Entity(tableName = "group_1", foreignKeys = [ForeignKey(
+    entity = Mentor::class,
+    parentColumns = arrayOf("id"),
+    childColumns = arrayOf("mentor_id")
+), ForeignKey(
+    entity = Course::class,
+    parentColumns = arrayOf("id"),
+    childColumns = arrayOf("course_id"),
+)]
+)
 data class Group(
     @PrimaryKey(autoGenerate = true)
     var id:Long = 0,

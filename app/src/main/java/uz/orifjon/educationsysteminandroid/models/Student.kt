@@ -2,10 +2,17 @@ package uz.orifjon.educationsysteminandroid.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity
+@Entity(foreignKeys = [
+    ForeignKey(
+        entity = Group::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("group_id")
+    )
+])
 data class Student(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,

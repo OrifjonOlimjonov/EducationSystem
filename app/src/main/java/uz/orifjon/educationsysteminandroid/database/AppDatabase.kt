@@ -2,12 +2,10 @@ package uz.orifjon.educationsysteminandroid.database
 
 import android.content.Context
 import androidx.room.*
-import androidx.sqlite.db.SupportSQLiteOpenHelper
 import uz.orifjon.educationsysteminandroid.models.*
 
-@Database(
-    entities = [Student::class, Group::class,Mentor::class,Course::class], version = 1, exportSchema = false)
-abstract class AppDatabase :RoomDatabase(){
+@Database(entities = [Student::class, Group::class,Mentor::class,Course::class], version = 1, exportSchema = false)
+abstract class AppDatabase:RoomDatabase(){
 
         abstract fun studentDao():StudentService
         abstract fun courseDao():CourseService
