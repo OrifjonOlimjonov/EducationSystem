@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "group_1")
 data class Group(
     @PrimaryKey(autoGenerate = true)
     var id:Long = 0,

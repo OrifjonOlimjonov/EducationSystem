@@ -1,3 +1,14 @@
 package uz.orifjon.educationsysteminandroid.models
 
-data class Mentor(var id:Long = 0,var firstname:String,var lastname:String,var patron:String,var speciality:String)
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class Mentor(
+    @PrimaryKey(autoGenerate = true)
+    var id:Long = 0,
+    var firstname:String,
+    var lastname:String,
+    var patron:String,
+    var speciality:String
+    )
