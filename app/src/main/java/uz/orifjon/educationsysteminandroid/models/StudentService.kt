@@ -1,6 +1,7 @@
 package uz.orifjon.educationsysteminandroid.models
 
 import androidx.room.*
+import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 
 @Dao
 interface StudentService {
@@ -20,4 +21,6 @@ interface StudentService {
     @Query("SELECT * FROM student WHERE group_id = :id")
     fun listGroupStudent(id:Long):List<Student>
 
+    @Query("SELECT * FROM student WHERE group_id = :id")
+    fun getGroupByStudent(id: Long):List<Student>
 }

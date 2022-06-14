@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentEditStudentGroupBinding
 import uz.orifjon.educationsysteminandroid.models.Student
@@ -30,14 +31,14 @@ class EditStudentGroupFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentEditStudentGroupBinding
-    private lateinit var mySqliteHelper:MySqliteHelper
+   // private lateinit var mySqliteHelper:MySqliteHelper
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEditStudentGroupBinding.inflate(inflater)
-        mySqliteHelper = MySqliteHelper(requireContext())
+        //mySqliteHelper = MySqliteHelper(requireContext())
         val student = arguments?.getSerializable("student") as Student
         binding.tvFirstName.setText(student.firstname)
         binding.tvLastName.setText(student.lastname)
@@ -56,7 +57,8 @@ class EditStudentGroupFragment : Fragment() {
                     registerDate = date,
                     groupId = student.groupId
                 )
-                mySqliteHelper.addStudent(student)
+                //mySqliteHelper.addStudent(student)
+                AppDatabase.getDatabase(requireContext()).studentDao().addStudent(student)
                 findNavController().popBackStack()
             } else {
                 Toast.makeText(requireContext(), "Maydonlarni to'ldiring!!", Toast.LENGTH_SHORT)

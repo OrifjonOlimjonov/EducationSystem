@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.adapters.AdapterRV
+import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentAddGroupBinding
 import uz.orifjon.educationsysteminandroid.models.Course
@@ -30,7 +31,7 @@ class AddGroupFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentAddGroupBinding
-    private lateinit var mySqliteHelper: MySqliteHelper
+   // private lateinit var mySqliteHelper: MySqliteHelper
     private lateinit var adapter: AdapterRV
     private lateinit var list: ArrayList<Course>
     override fun onCreateView(
@@ -38,8 +39,9 @@ class AddGroupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddGroupBinding.inflate(inflater)
-        mySqliteHelper = MySqliteHelper(requireContext())
-        list = mySqliteHelper.getAllCourses()
+//        mySqliteHelper = MySqliteHelper(requireContext())
+//        list = mySqliteHelper.getAllCourses()
+        list = AppDatabase.getDatabase(requireContext()).courseDao().listCourse() as ArrayList<Course>
         if(list.isEmpty()){
             Toast.makeText(requireContext(), "Kurslar mavjud emas!!", Toast.LENGTH_SHORT).show()
         }

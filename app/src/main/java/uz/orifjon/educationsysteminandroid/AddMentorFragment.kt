@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.adapters.AdapterRV
+import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentAddMentorBinding
 import uz.orifjon.educationsysteminandroid.models.Course
@@ -28,7 +29,7 @@ class AddMentorFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentAddMentorBinding
-    private lateinit var mySqliteHelper: MySqliteHelper
+    //private lateinit var mySqliteHelper: MySqliteHelper
     private lateinit var adapter: AdapterRV
     private lateinit var list: ArrayList<Course>
 
@@ -37,8 +38,9 @@ class AddMentorFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddMentorBinding.inflate(inflater)
-        mySqliteHelper = MySqliteHelper(requireContext())
-        list = mySqliteHelper.getAllCourses()
+        //mySqliteHelper = MySqliteHelper(requireContext())
+//        list = mySqliteHelper.getAllCourses()
+        list = AppDatabase.getDatabase(requireContext()).courseDao().listCourse() as ArrayList<Course>
         adapter = AdapterRV(list) { course, i ->
             val bundle = Bundle()
             bundle.putLong("id", course.id)

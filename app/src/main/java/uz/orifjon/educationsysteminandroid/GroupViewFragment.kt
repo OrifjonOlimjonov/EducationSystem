@@ -12,9 +12,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.adapters.AdapterStudentRV
+import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.DeleteDialogBinding
-import uz.orifjon.educationsysteminandroid.databinding.EditGroupDialogBinding
 import uz.orifjon.educationsysteminandroid.databinding.FragmentGroupViewBinding
 import uz.orifjon.educationsysteminandroid.models.Student
 
@@ -34,7 +34,8 @@ class GroupViewFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentGroupViewBinding
-    private lateinit var mySqliteHelper: MySqliteHelper
+
+    //    private lateinit var mySqliteHelper: MySqliteHelper
     private lateinit var adapter: AdapterStudentRV
     private lateinit var list: ArrayList<Student>
 
@@ -44,10 +45,14 @@ class GroupViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGroupViewBinding.inflate(inflater)
-        mySqliteHelper = MySqliteHelper(requireContext())
+        //mySqliteHelper = MySqliteHelper(requireContext())
         val groupId = arguments?.getLong("id")
-        list = mySqliteHelper.getStudentByGroup(groupId!!)
-        val group = mySqliteHelper.getGroupById(groupId)
+        // list = mySqliteHelper.getStudentByGroup(groupId!!)
+        list = AppDatabase.getDatabase(requireContext()).studentDao()
+            .getGroupByStudent(groupId!!) as ArrayList<Student>
+//        val group = mySqliteHelper.getGroupById(groupId)
+        val group = AppDatabase.getDatabase(requireContext()).groupDao().getGroupById(groupId)
+
         binding.groupName.text = group.groupName
         binding.groupCount.text = "O'quvchilar soni: ${list.size} ta"
         binding.groupTime.text = "Vaqti: ${group.groupDate.split(" ").take(2)[0]}"
@@ -58,7 +63,8 @@ class GroupViewFragment : Fragment() {
             val alertDialog1 = alertDialog.create()
             alertDialog1.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             binding.btnYes.setOnClickListener {
-                mySqliteHelper.deleteStudent(student)
+                AppDatabase.getDatabase(requireContext()).studentDao().deleteStudent(student)
+                //mySqliteHelper.deleteStudent(student)
                 list.removeAt(i)
                 adapter.notifyItemRemoved(i)
                 adapter.notifyItemRangeChanged(i, list.size)
@@ -70,32 +76,34 @@ class GroupViewFragment : Fragment() {
             }
             alertDialog1.show()
         }, { student, i ->
-                val bundle = Bundle()
-                bundle.putSerializable("student",student)
-                bundle.putString("date",student.registerDate)
-                findNavController().navigate(R.id.editStudentGroupFragment,bundle)
+            val bundle = Bundle()
+            bundle.putSerializable("student", student)
+            bundle.putString("date", student.registerDate)
+            findNavController().navigate(R.id.editStudentGroupFragment, bundle)
         })
-        if(list.size == 0){
+        if (list.size == 0) {
             Toast.makeText(requireContext(), "O'quvchilar mavjud emas!!", Toast.LENGTH_SHORT).show()
         }
         binding.btnStartGroup.setOnClickListener {
-            if(list.size > 4){
-            group.groupIsOpen = 1
-            mySqliteHelper.editGroup(group)
-            findNavController().popBackStack()
-            }else{
-                Toast.makeText(requireContext(), "Guruh hali to'lmagan!!", Toast.LENGTH_SHORT).show()
+            if (list.size > 4) {
+                group.groupIsOpen = 1
+                AppDatabase.getDatabase(requireContext()).groupDao().editGroup(group)
+                //mySqliteHelper.editGroup(group)
+                findNavController().popBackStack()
+            } else {
+                Toast.makeText(requireContext(), "Guruh hali to'lmagan!!", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
         binding.toolbar.setOnMenuItemClickListener {
-            when(it.itemId){
-                R.id.addButton->{
+            when (it.itemId) {
+                R.id.addButton -> {
                     val bundle = Bundle()
-                    bundle.putLong("id",groupId)
-                    findNavController().navigate(R.id.addGroupStudentFragment,bundle)
+                    bundle.putLong("id", groupId)
+                    findNavController().navigate(R.id.addGroupStudentFragment, bundle)
                 }
             }
             true

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentAddNewMentorBinding
 import uz.orifjon.educationsysteminandroid.models.Mentor
@@ -27,14 +28,14 @@ class AddNewMentorFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentAddNewMentorBinding
-    private lateinit var mySqliteHelper: MySqliteHelper
+    //private lateinit var mySqliteHelper: MySqliteHelper
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val speciality = arguments?.getString("tool")
         binding = FragmentAddNewMentorBinding.inflate(inflater)
-        mySqliteHelper = MySqliteHelper(requireContext())
+        //mySqliteHelper = MySqliteHelper(requireContext())
         binding.btnAddMentor.setOnClickListener {
             if (binding.tvFirstName.text.isNotEmpty() && binding.tvLastName.text.isNotEmpty() && binding.tvPatron.text.isNotEmpty()) {
                 val firstName = binding.tvFirstName.text.toString()
@@ -46,7 +47,8 @@ class AddNewMentorFragment : Fragment() {
                     patron = patron,
                     speciality = speciality!!
                 )
-                mySqliteHelper.addMentor(mentor)
+                //mySqliteHelper.addMentor(mentor)
+                AppDatabase.getDatabase(requireContext()).mentorDao().addMentor(mentor)
                 findNavController().popBackStack()
             }
         }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentAddGroupBinding
 import uz.orifjon.educationsysteminandroid.databinding.FragmentAddGroupStudentBinding
@@ -30,13 +31,14 @@ class AddGroupStudentFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentAddGroupStudentBinding
-    private lateinit var mySqliteHelper: MySqliteHelper
+
+    //  private lateinit var mySqliteHelper: MySqliteHelper
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddGroupStudentBinding.inflate(inflater, container, false)
-        mySqliteHelper = MySqliteHelper(requireContext())
+        // mySqliteHelper = MySqliteHelper(requireContext())
         val groupId = arguments?.getLong("id")
 
         binding.btnAddStudent.setOnClickListener {
@@ -44,12 +46,20 @@ class AddGroupStudentFragment : Fragment() {
             val lastName = binding.tvLastName.text.toString().trim()
             val patron = binding.tvPatron.text.toString().trim()
             val date = binding.tvDate.text.toString().trim()
-            if(firsName.isNotEmpty() && lastName.isNotEmpty() && patron.isNotEmpty() && date.isNotEmpty()){
-            val student = Student(firstname = firsName, lastname = lastName, patron = patron, registerDate = date, groupId = groupId!!)
-            mySqliteHelper.addStudent(student)
-            findNavController().popBackStack()
-            }else{
-                Toast.makeText(requireContext(), "Maydonlarni to'ldiring!!", Toast.LENGTH_SHORT).show()
+            if (firsName.isNotEmpty() && lastName.isNotEmpty() && patron.isNotEmpty() && date.isNotEmpty()) {
+                val student = Student(
+                    firstname = firsName,
+                    lastname = lastName,
+                    patron = patron,
+                    registerDate = date,
+                    groupId = groupId!!
+                )
+                //  mySqliteHelper.addStudent(student)
+                AppDatabase.getDatabase(requireContext()).studentDao().addStudent(student)
+                findNavController().popBackStack()
+            } else {
+                Toast.makeText(requireContext(), "Maydonlarni to'ldiring!!", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
         binding.tvDate.setOnClickListener {

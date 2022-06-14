@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.adapters.AdapterMentorRV
+import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentMentorInfoBinding
 import uz.orifjon.educationsysteminandroid.databinding.MentorEditDialogBinding
@@ -33,25 +34,28 @@ class MentorInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentMentorInfoBinding
     private lateinit var adapter: AdapterMentorRV
-    private lateinit var mySqliteHelper: MySqliteHelper
+
+    //  private lateinit var mySqliteHelper: MySqliteHelper
     private lateinit var list: ArrayList<Mentor>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMentorInfoBinding.inflate(inflater)
-        mySqliteHelper = MySqliteHelper(requireContext())
+        //  mySqliteHelper = MySqliteHelper(requireContext())
         val tool = arguments?.getString("toolbar")
         binding.toolbar.title = tool
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
-        list = mySqliteHelper.getAllMentor(tool!!)
-        
-        if(list.size == 0){
+//        list = mySqliteHelper.getAllMentor(tool!!)
+        list = AppDatabase.getDatabase(requireContext()).mentorDao()
+            .getByGroupMentor(tool!!) as ArrayList<Mentor>
+        if (list.size == 0) {
             Toast.makeText(requireContext(), "Mentorlar mavjud emas!!", Toast.LENGTH_SHORT).show()
         }
         adapter = AdapterMentorRV(list, { mentor, i ->
             list.removeAt(i)
-            mySqliteHelper.deleteMentor(mentor)
+            AppDatabase.getDatabase(requireContext()).mentorDao().deleteMentor(mentor)
+            //mySqliteHelper.deleteMentor(mentor)
             adapter.notifyItemRemoved(i)
             adapter.notifyItemRangeChanged(i, list.size)
         }, { mentor, i ->
@@ -77,7 +81,8 @@ class MentorInfoFragment : Fragment() {
                         patron = patron,
                         speciality = tool!!
                     )
-                    mySqliteHelper.editMentor(mentor)
+                    AppDatabase.getDatabase(requireContext()).mentorDao().editMentor(mentor)
+                    //mySqliteHelper.editMentor(mentor)
                     list[i] = mentor
                     alertDialog1.dismiss()
                     adapter.notifyItemChanged(i)

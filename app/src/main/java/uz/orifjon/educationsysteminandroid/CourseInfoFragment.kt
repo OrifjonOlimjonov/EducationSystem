@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentCourseInfoBinding
 
@@ -26,15 +27,16 @@ class CourseInfoFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentCourseInfoBinding
-    private lateinit var mySqliteHelper: MySqliteHelper
+  //  private lateinit var mySqliteHelper: MySqliteHelper
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCourseInfoBinding.inflate(inflater)
-        mySqliteHelper = MySqliteHelper(requireContext())
+       // mySqliteHelper = MySqliteHelper(requireContext())
         val id = arguments?.getLong("id")
-        val course = mySqliteHelper.getCourseById(id!!)
+        val course = AppDatabase.getDatabase(requireContext()).courseDao().getByIdCourse(id!!)
+            //mySqliteHelper.getCourseById(id!!)
         binding.toolbar.title = course.name
         binding.textInfo.text = course.description
         binding.toolbar.setNavigationOnClickListener {

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.adapters.AdapterGroupRV
 import uz.orifjon.educationsysteminandroid.adapters.SpinnerMentorAdapter
 import uz.orifjon.educationsysteminandroid.adapters.SpinnerTimeAdapter
+import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.AddCourseDialogBinding
 import uz.orifjon.educationsysteminandroid.databinding.EditGroupDialogBinding
@@ -37,7 +38,7 @@ class ViewPager2Fragment : Fragment() {
     }
 
     private lateinit var binding: FragmentViewPager2Binding
-    private lateinit var mySqliteHelper: MySqliteHelper
+//    private lateinit var mySqliteHelper: MySqliteHelper
     private lateinit var adapter: AdapterGroupRV
     private lateinit var list: ArrayList<Group>
     private lateinit var listCount: ArrayList<Int>
@@ -49,20 +50,26 @@ class ViewPager2Fragment : Fragment() {
     ): View? {
         listCount = ArrayList()
         binding = FragmentViewPager2Binding.inflate(inflater)
-        mySqliteHelper = MySqliteHelper(requireContext())
-        list = mySqliteHelper.getGroupList(param1!!, param2!!)
-        mentorList = mySqliteHelper.getAllMentor(mySqliteHelper.getCourseById(param2!!).name)
+     //   mySqliteHelper = MySqliteHelper(requireContext())
+        //list = mySqliteHelper.getGroupList(param1!!, param2!!)
+        list = AppDatabase.getDatabase(requireContext()).groupDao().getGroupList(param1!!,param2!!) as ArrayList<Group>
+
+//        mentorList = mySqliteHelper.getAllMentor(mySqliteHelper.getCourseById(param2!!).name)
+
+        mentorList = AppDatabase.getDatabase(requireContext()).mentorDao().getByGroupMentor(AppDatabase.getDatabase(requireContext()).courseDao().getByIdCourse(param2!!).name) as ArrayList<Mentor>
         adapterMentor = SpinnerMentorAdapter(mentorList)
         if (list.size == 0) {
             Toast.makeText(requireContext(), "Guruhlar mavjud emas!", Toast.LENGTH_SHORT).show()
         }
         for (i in 0 until list.size) {
-            listCount.add(mySqliteHelper.getStudentByGroup(list[i].id).size)
+           listCount.add(AppDatabase.getDatabase(requireContext()).studentDao().getGroupByStudent(list[i].id).size)
+//            listCount.add(mySqliteHelper.getStudentByGroup(list[i].id).size)
         }
         if (list.isNotEmpty() && listCount.isNotEmpty()) {
             adapter = AdapterGroupRV(list, listCount, { group, i ->
                 //TODO: REMOVE group
-                mySqliteHelper.deleteGroup(group)
+                AppDatabase.getDatabase(requireContext()).groupDao().deleteGroup(group)
+//                mySqliteHelper.deleteGroup(group)
                 list.removeAt(i)
                 adapter.notifyItemRemoved(i)
                 adapter.notifyItemRangeChanged(i, list.size)
@@ -98,12 +105,13 @@ class ViewPager2Fragment : Fragment() {
                         id = group.id,
                         groupName = groupName,
                         groupIsOpen = 0,
-                        groupType = mySqliteHelper.getCourseById(param2!!).name,
+                        groupType = AppDatabase.getDatabase(requireContext()).courseDao().getByIdCourse(param2!!).name,
                         groupDate = "$groupTime ${take[1]}",
                         courseId = group.courseId,
                         mentorId = mentorList[groupMentor].id
                     )
-                    mySqliteHelper.editGroup(groupNew)
+//                    mySqliteHelper.editGroup(groupNew)
+                    AppDatabase.getDatabase(requireContext()).groupDao().editGroup(groupNew)
                     this.list[i] = groupNew
                     adapter.notifyItemChanged(i)
                     alertDialog1.dismiss()

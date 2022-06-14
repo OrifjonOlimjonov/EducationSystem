@@ -16,4 +16,8 @@ interface CourseService {
 
     @Query("SELECT * FROM course")
     fun listCourse():List<Course>
+
+    @Query("SELECT * FROM course WHERE id = :id")
+    fun getByIdCourse(id:Long):Course
+
 }

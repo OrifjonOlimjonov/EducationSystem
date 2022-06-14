@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.adapters.SpinnerGroupAdapter
 import uz.orifjon.educationsysteminandroid.adapters.SpinnerMentorAdapter
+import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentRegisterStudentBinding
 import uz.orifjon.educationsysteminandroid.models.Group
@@ -38,20 +39,21 @@ class RegisterStudentFragment : Fragment() {
     private lateinit var spinnerGroup: SpinnerGroupAdapter
     private lateinit var listMentor: ArrayList<Mentor>
     private lateinit var listGroup: ArrayList<Group>
-    private lateinit var mySqliteHelper: MySqliteHelper
+//    private lateinit var mySqliteHelper: MySqliteHelper
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRegisterStudentBinding.inflate(inflater)
-        mySqliteHelper = MySqliteHelper(requireContext())
+        //mySqliteHelper = MySqliteHelper(requireContext())
         val name = arguments?.getString("name")
-        listMentor = mySqliteHelper.getAllMentor(name!!)
+//        listMentor = mySqliteHelper.getAllMentor(name!!)
+        listMentor = AppDatabase.getDatabase(requireContext()).mentorDao().getByGroupMentor(name!!) as ArrayList<Mentor>
         spinnerMentor = SpinnerMentorAdapter(listMentor)
         binding.spinnerMentor.adapter = spinnerMentor
         if (listMentor.isNotEmpty()) {
-            listGroup =
-                mySqliteHelper.getMentorGroupList(listMentor[binding.spinnerMentor.selectedItemPosition].id)
+            listGroup =AppDatabase.getDatabase(requireContext()).groupDao().getMentorGroupList(listMentor[binding.spinnerMentor.selectedItemPosition].id) as ArrayList<Group>
+                //mySqliteHelper.getMentorGroupList(listMentor[binding.spinnerMentor.selectedItemPosition].id)
             spinnerGroup = SpinnerGroupAdapter(listGroup)
             binding.spinnerGroup.adapter = spinnerGroup
         } else {
@@ -91,7 +93,8 @@ class RegisterStudentFragment : Fragment() {
                             registerDate = date,
                             groupId = group.toLong()
                         )
-                        mySqliteHelper.addStudent(student)
+                        AppDatabase.getDatabase(requireContext()).studentDao().addStudent(student)
+//                        mySqliteHelper.addStudent(student)
                         findNavController().popBackStack()
                     }
                 } else {
