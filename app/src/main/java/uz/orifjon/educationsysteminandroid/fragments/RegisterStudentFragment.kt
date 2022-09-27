@@ -1,4 +1,4 @@
-package uz.orifjon.educationsysteminandroid
+package uz.orifjon.educationsysteminandroid.fragments
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener

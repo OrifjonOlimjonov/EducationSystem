@@ -9,8 +9,7 @@ import androidx.room.PrimaryKey
     tableName = "group_1", foreignKeys = [ForeignKey(
         entity = Mentor::class,
         parentColumns = arrayOf("id"),
-        childColumns = arrayOf("mentor_id"),
-        onDelete = ForeignKey.CASCADE
+        childColumns = arrayOf("mentor_id")
     ), ForeignKey(
         entity = Course::class,
         parentColumns = arrayOf("id"),

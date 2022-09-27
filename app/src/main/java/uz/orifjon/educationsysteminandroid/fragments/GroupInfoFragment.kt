@@ -1,4 +1,4 @@
-package uz.orifjon.educationsysteminandroid
+package uz.orifjon.educationsysteminandroid.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import uz.orifjon.educationsysteminandroid.R
 import uz.orifjon.educationsysteminandroid.adapters.ViewPager2Adapter
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentGroupInfoBinding

@@ -1,4 +1,4 @@
-package uz.orifjon.educationsysteminandroid
+package uz.orifjon.educationsysteminandroid.fragments
 
 import android.app.AlertDialog
 import android.graphics.Color
@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import uz.orifjon.educationsysteminandroid.R
 import uz.orifjon.educationsysteminandroid.adapters.AdapterGroupRV
 import uz.orifjon.educationsysteminandroid.adapters.SpinnerMentorAdapter
 import uz.orifjon.educationsysteminandroid.adapters.SpinnerTimeAdapter

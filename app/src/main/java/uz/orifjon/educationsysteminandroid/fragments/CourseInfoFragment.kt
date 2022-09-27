@@ -1,4 +1,4 @@
-package uz.orifjon.educationsysteminandroid
+package uz.orifjon.educationsysteminandroid.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import uz.orifjon.educationsysteminandroid.R
 import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
 import uz.orifjon.educationsysteminandroid.databinding.FragmentCourseInfoBinding

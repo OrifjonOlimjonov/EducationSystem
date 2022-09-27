@@ -1,5 +1,6 @@
-package uz.orifjon.educationsysteminandroid
+package uz.orifjon.educationsysteminandroid.fragments
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,14 +12,13 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import uz.orifjon.educationsysteminandroid.database.AppDatabase
 import uz.orifjon.educationsysteminandroid.database.MySqliteHelper
-import uz.orifjon.educationsysteminandroid.databinding.FragmentAddGroupBinding
-import uz.orifjon.educationsysteminandroid.databinding.FragmentAddGroupStudentBinding
+import uz.orifjon.educationsysteminandroid.databinding.FragmentEditStudentGroupBinding
 import uz.orifjon.educationsysteminandroid.models.Student
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class AddGroupStudentFragment : Fragment() {
+class EditStudentGroupFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -30,31 +30,34 @@ class AddGroupStudentFragment : Fragment() {
         }
     }
 
-    private lateinit var binding: FragmentAddGroupStudentBinding
-
-    //  private lateinit var mySqliteHelper: MySqliteHelper
+    private lateinit var binding: FragmentEditStudentGroupBinding
+   // private lateinit var mySqliteHelper:MySqliteHelper
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentAddGroupStudentBinding.inflate(inflater, container, false)
-        // mySqliteHelper = MySqliteHelper(requireContext())
-        val groupId = arguments?.getLong("id")
-
+    ): View {
+        binding = FragmentEditStudentGroupBinding.inflate(inflater)
+        //mySqliteHelper = MySqliteHelper(requireContext())
+        val student = arguments?.getSerializable("student") as Student
+        binding.tvFirstName.setText(student.firstname)
+        binding.tvLastName.setText(student.lastname)
+        binding.tvPatron.setText(student.patron)
+        binding.tvDate.setText(student.registerDate)
         binding.btnAddStudent.setOnClickListener {
-            val firsName = binding.tvFirstName.text.toString().trim()
-            val lastName = binding.tvLastName.text.toString().trim()
-            val patron = binding.tvPatron.text.toString().trim()
-            val date = binding.tvDate.text.toString().trim()
+            val firsName = binding.tvFirstName.text.toString()
+            val lastName = binding.tvLastName.text.toString()
+            val patron = binding.tvPatron.text.toString()
+            val date = binding.tvDate.text.toString()
             if (firsName.isNotEmpty() && lastName.isNotEmpty() && patron.isNotEmpty() && date.isNotEmpty()) {
                 val student = Student(
                     firstname = firsName,
                     lastname = lastName,
                     patron = patron,
                     registerDate = date,
-                    groupId = groupId!!
+                    groupId = student.groupId
                 )
-                //  mySqliteHelper.addStudent(student)
+                //mySqliteHelper.addStudent(student)
                 AppDatabase.getDatabase(requireContext()).studentDao().addStudent(student)
                 findNavController().popBackStack()
             } else {
@@ -71,7 +74,7 @@ class AddGroupStudentFragment : Fragment() {
             )
             datePickerDialog.show()
         }
-        binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+
         return binding.root
     }
 
@@ -79,7 +82,7 @@ class AddGroupStudentFragment : Fragment() {
 
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            AddGroupStudentFragment().apply {
+            EditStudentGroupFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

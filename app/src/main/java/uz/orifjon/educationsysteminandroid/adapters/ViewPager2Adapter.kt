@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import uz.orifjon.educationsysteminandroid.ViewPager2Fragment
+import uz.orifjon.educationsysteminandroid.fragments.ViewPager2Fragment
 
 class ViewPager2Adapter(fragment: FragmentManager, lifecycle: Lifecycle, var id:Long) :
     FragmentStateAdapter(fragment, lifecycle) {
